@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FD-backed SBIC Credit Card — Operating Construct</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0f172a;
+            --slate: #1e293b;
+            --muted: #64748b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --accent: #0ea5e9;
+            --accent-light: #e0f2fe;
+            --teal: #0d9488;
+            --green: #059669;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--slate);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 48px;
+        }
+        .nav-brand { font-size: 0.82rem; font-weight: 600; color: var(--slate); }
+        .nav-links { display: flex; gap: 1.25rem; list-style: none; flex-wrap: nowrap; }
+        .nav-links a { font-size: 0.72rem; color: var(--muted); text-decoration: none; transition: color .2s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--slate); }
+
+        /* ── Layout ── */
+        section { padding: 3rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-divider { height: 1px; background: var(--border); }
+
+        /* ── Typography helpers ── */
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: .6rem;
+        }
+        h2 { font-size: 1.9rem; font-weight: 700; color: var(--navy); margin-bottom: .9rem; }
+        .section-desc { font-size: .92rem; color: var(--muted); max-width: 640px; margin-bottom: 1.75rem; }
+
+        /* ── Hero ── */
+        .hero { background: var(--navy); color: #fff; padding: 3.5rem 2rem; }
+        .hero-label {
+            font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+            text-transform: uppercase; color: #64748b; margin-bottom: .9rem;
+        }
+        .hero h1 { font-size: 2.2rem; font-weight: 700; line-height: 1.2; margin-bottom: .9rem; max-width: 720px; }
+        .hero-subtitle { font-size: 1rem; color: #94a3b8; max-width: 580px; margin-bottom: 1.5rem; }
+        .hero-meta { display: flex; gap: 1.5rem; font-size: .82rem; color: #475569; flex-wrap: wrap; }
+
+        /* ── Challenge cards ── */
+        .challenge-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+        .challenge-card {
+            background: var(--light); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.25rem;
+        }
+        .challenge-num { font-size: .72rem; font-weight: 700; color: var(--accent); margin-bottom: .6rem; }
+        .challenge-card h3 { font-size: .95rem; font-weight: 600; color: var(--navy); margin-bottom: .4rem; }
+        .challenge-card p { font-size: .85rem; color: var(--muted); }
+
+        /* ── Structures ── */
+        .structure-section { background: var(--light); }
+        .option-toggle {
+            display: flex; background: var(--border); border-radius: 8px;
+            padding: 3px; width: fit-content; margin-bottom: 2rem;
+        }
+        .toggle-btn {
+            padding: .45rem 1.25rem; border-radius: 6px; border: none;
+            font-size: .82rem; font-weight: 500; cursor: pointer;
+            transition: all .2s; background: transparent; color: var(--muted);
+        }
+        .toggle-btn.active { background: #fff; color: var(--navy); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+
+        .compare-table {
+            width: 100%; border-collapse: collapse; background: #fff;
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,.07);
+        }
+        .compare-table th {
+            padding: .9rem 1.25rem; text-align: left;
+            font-size: .72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .05em; background: var(--navy); color: #fff;
+        }
+        .compare-table td {
+            padding: .9rem 1.25rem; font-size: .875rem;
+            border-bottom: 1px solid var(--border); vertical-align: top;
+        }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table td:first-child { font-weight: 500; color: var(--slate); width: 190px; }
+        .compare-table td.highlight { }
+        .compare-table td.dimmed { }
+
+        /* ── Recommendation ── */
+        .rec-box {
+            background: var(--navy); color: #fff;
+            border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.25rem;
+        }
+        .rec-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #64748b; margin-bottom: .6rem; }
+        .rec-headline { font-size: 1.4rem; font-weight: 700; margin-bottom: .6rem; }
+        .rec-sub { font-size: .88rem; color: #94a3b8; }
+
+        .rationale-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: .9rem; margin-bottom: 1.5rem; }
+        .rationale-item {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 10px; padding: .9rem 1.1rem;
+        }
+        .rationale-item h4 { font-size: .875rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+        .rationale-item p { font-size: .82rem; color: var(--muted); }
+
+        .caveat-box {
+            background: #fffbeb; border: 1px solid #fde68a;
+            border-radius: 10px; padding: .9rem 1.1rem;
+        }
+        .caveat-box h4 {
+            font-size: .72rem; font-weight: 700; color: #92400e;
+            text-transform: uppercase; letter-spacing: .05em; margin-bottom: .75rem;
+        }
+        .caveat-list { list-style: none; }
+        .caveat-list li {
+            font-size: .83rem; color: #78350f; padding: .2rem 0 .2rem 1rem; position: relative;
+        }
+        .caveat-list li::before { content: '—'; position: absolute; left: 0; color: #d97706; }
+
+        /* ── Journey ── */
+        .journey-section { background: var(--light); }
+
+        /* ── Journey timeline ── */
+        .journey-section { background: var(--light); }
+        .journey-panel { display: none; }
+        .journey-panel.active { display: block; }
+
+        .journey-timeline {
+            display: flex; flex-direction: column; gap: 0;
+            border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+        }
+        .jt-step {
+            display: flex; gap: .85rem; padding: .85rem 1.1rem;
+            background: #fff; border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .jt-step:last-child { border-bottom: none; }
+        .jt-step.jt-extra {
+            background: #fffbeb;
+            border-left: 3px solid #f59e0b;
+        }
+        .jt-step.jt-final { background: #f0fdf4; }
+        .jt-num {
+            width: 26px; height: 26px; border-radius: 50%;
+            background: var(--light); border: 1px solid var(--border);
+            font-size: .72rem; font-weight: 700; color: var(--muted);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; margin-top: 2px;
+        }
+        .jt-extra .jt-num { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
+        .jt-final .jt-num { background: #d1fae5; border-color: #6ee7b7; color: #065f46; }
+        .jt-content h4 { font-size: .875rem; font-weight: 600; color: var(--navy); margin-bottom: .15rem; }
+        .jt-content p { font-size: .8rem; color: var(--muted); line-height: 1.5; margin-bottom: .3rem; }
+        .jt-note {
+            background: var(--accent-light); border-radius: 6px;
+            padding: .4rem .75rem; font-size: .78rem; color: #0369a1;
+            font-weight: 500; display: inline-block; margin-top: .2rem;
+        }
+        .jt-note.green { background: #d1fae5; color: #065f46; }
+        .entity-pill {
+            display: inline-flex; align-items: center;
+            padding: .1rem .6rem; border-radius: 999px;
+            font-size: .68rem; font-weight: 600; margin-top: .2rem;
+        }
+        .ep-customer { background: #ede9fe; color: #5b21b6; }
+        .ep-kvb      { background: #d1fae5; color: #065f46; }
+        .ep-sbi      { background: #dbeafe; color: #1e40af; }
+        .ep-both     { background: var(--light); color: var(--muted); border: 1px solid var(--border); }
+        .extra-badge {
+            display: inline-flex; align-items: center; gap: .3rem;
+            font-size: .68rem; font-weight: 700; color: #92400e;
+            background: #fef3c7; border: 1px solid #f59e0b;
+            padding: .1rem .6rem; border-radius: 999px; margin-top: .2rem;
+        }
+
+        /* ── Collateral construct ── */
+        .pledge-steps {
+            display: flex; flex-direction: column; gap: 0;
+            border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .pledge-row {
+            display: flex; align-items: flex-start; gap: .9rem;
+            padding: .9rem 1.25rem; background: #fff;
+            border-bottom: 1px solid var(--border);
+        }
+        .pledge-row:last-child { border-bottom: none; }
+        .pledge-num {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--navy); color: #fff;
+            font-size: .78rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .pledge-row-content h4 { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: .2rem; }
+        .pledge-row-content p { font-size: .83rem; color: var(--muted); }
+        .pledge-row-content .ep { margin-top: .4rem; }
+
+        .default-chain {
+            display: flex; align-items: center; gap: 0;
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .dc-box {
+            flex: 1; padding: .9rem 1rem; text-align: center;
+            border-right: 1px solid var(--border);
+        }
+        .dc-box:last-child { border-right: none; }
+        .dc-box .dc-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: .3rem; }
+        .dc-box .dc-text { font-size: .82rem; font-weight: 600; color: var(--navy); }
+        .dc-box.dc-trigger { background: #fef2f2; }
+        .dc-box.dc-trigger .dc-text { color: #991b1b; }
+        .dc-box.dc-end { background: #f0fdf4; }
+        .dc-box.dc-end .dc-text { color: #065f46; }
+
+        /* ── Collateral ── */
+.mechanism-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+        .mechanism-card {
+            background: var(--light); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1.2rem;
+        }
+        .mechanism-card h4 { font-size: .85rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+        .mechanism-card p { font-size: .8rem; color: var(--muted); }
+
+        .legal-note {
+            background: #fef9c3; border: 1px solid #fde047;
+            border-radius: 8px; padding: 1rem 1.25rem;
+            font-size: .8rem; color: #713f12; margin-top: 1.5rem;
+        }
+
+        /* ── Ownership ── */
+        .ownership-table {
+            width: 100%; border-collapse: collapse; background: #fff;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.07);
+            margin-bottom: 2.25rem;
+        }
+        .ownership-table th {
+            padding: .8rem 1.2rem; text-align: left; font-size: .72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .05em;
+            background: var(--light); color: var(--muted); border-bottom: 1px solid var(--border);
+        }
+        .ownership-table td { padding: .85rem 1.2rem; font-size: .875rem; border-bottom: 1px solid var(--border); }
+        .ownership-table tr:last-child td { border-bottom: none; }
+
+        .owner-tag {
+            display: inline-flex; align-items: center;
+            padding: .2rem .7rem; border-radius: 999px;
+            font-size: .75rem; font-weight: 600;
+        }
+        .o-kvb { background: #d1fae5; color: #065f46; }
+        .o-sbi { background: #dbeafe; color: #1e40af; }
+        .o-hyp { background: #ede9fe; color: #5b21b6; }
+        .o-tbd { background: var(--light); color: var(--muted); border: 1px solid var(--border); }
+
+        .kyc-flow { display: flex; flex-direction: column; gap: .6rem; }
+        .kyc-step {
+            display: flex; gap: 1rem; align-items: flex-start;
+            padding: .9rem 1.2rem; background: #fff;
+            border: 1px solid var(--border); border-radius: 10px;
+        }
+        .kyc-step-num { font-size: .72rem; font-weight: 700; color: var(--accent); min-width: 18px; padding-top: 2px; }
+        .kyc-step p { font-size: .875rem; color: var(--slate); }
+
+        .info-note {
+            background: #f0f9ff; border: 1px solid #bae6fd;
+            border-radius: 10px; padding: 1rem 1.25rem;
+            font-size: .83rem; color: #0369a1; margin-top: 1.5rem;
+        }
+
+        /* ── Source chips & assumption badges ── */
+        /* ── Entity Flow Diagram ── */
+        .fd2-wrap { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:1.25rem 0 2rem; }
+        .fd2-flow { display:flex; align-items:stretch; padding:1.1rem 1rem; background:white; gap:.6rem; }
+        .fd2-ent { flex:0 0 auto; padding:.85rem .95rem; border-radius:10px; }
+        .fd2-cust { background:#0f172a; width:170px; }
+        .fd2-kvb  { background:#134e4a; width:170px; }
+        .fd2-sbi  { background:#0c4a6e; width:180px; }
+        .fd2-ent-name { font-size:.9rem; font-weight:700; color:white; margin:0 0 .3rem; }
+        .fd2-ent-role { font-size:.71rem; color:rgba(255,255,255,.55); margin:0 0 .12rem; line-height:1.4; }
+        .fd2-mid { flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.3rem; }
+        .fd2-mid-lbl { font-size:.69rem; font-weight:600; color:var(--muted); text-align:center; margin:0; line-height:1.35; }
+        .fd2-arr { position:relative; width:100%; height:2px; background:#cbd5e1; }
+        .fd2-arr-r::after  { content:''; position:absolute; right:-1px; top:-4px; border:5px solid transparent; border-left:7px solid #94a3b8; border-right:0; }
+        .fd2-arr-b::before { content:''; position:absolute; left:-1px; top:-4px; border:5px solid transparent; border-right:7px solid #94a3b8; border-left:0; }
+        .fd2-arr-b::after  { content:''; position:absolute; right:-1px; top:-4px; border:5px solid transparent; border-left:7px solid #94a3b8; border-right:0; }
+        .fd2-return { font-size:.72rem; font-weight:600; color:#0284c7; text-align:center; padding:.45rem 1rem; background:#eff6ff; border-top:1px solid #dbeafe; }
+        .fd2-hf { display:flex; align-items:center; gap:1rem; padding:.9rem 1.1rem; background:#f8fafc; border-top:2.5px solid #0d9488; }
+        .fd2-hf-img { height:30px; display:block; flex-shrink:0; }
+        .fd2-hf-sep { width:1px; height:38px; background:#e2e8f0; flex-shrink:0; }
+        .fd2-hf-sub { font-size:.78rem; font-weight:700; color:var(--navy); margin:0 0 .35rem; }
+        .fd2-hf-tags { display:flex; gap:.4rem; flex-wrap:wrap; }
+        .fd2-hf-tags span { font-size:.67rem; font-weight:600; color:#0369a1; background:#e0f2fe; border:1px solid #bae6fd; padding:.1rem .45rem; border-radius:100px; }
+
+        .src-chip {
+            display: inline-flex; align-items: center; gap: .2rem;
+            font-size: .64rem; font-weight: 600; color: #0369a1;
+            background: var(--accent-light); border: 1px solid #bae6fd;
+            border-radius: 4px; padding: .08rem .4rem;
+            text-decoration: none; vertical-align: middle;
+            margin-left: .3rem; white-space: nowrap;
+        }
+        .src-chip:hover { background: #bae6fd; }
+        .assum-tag {
+            display: inline-flex; align-items: center;
+            font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+            text-transform: uppercase; color: #92400e;
+            background: #fef3c7; border: 1px solid #f59e0b;
+            border-radius: 4px; padding: .08rem .4rem;
+            vertical-align: middle; margin-left: .3rem; white-space: nowrap;
+        }
+        .sources-box {
+            background: var(--light); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.25rem 1.5rem;
+        }
+        .sources-box h4 { font-size: .8rem; font-weight: 700; color: var(--navy); margin-bottom: .75rem; text-transform: uppercase; letter-spacing: .07em; }
+        .sources-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+        .sources-list li { display: flex; gap: .75rem; align-items: baseline; }
+        .src-id {
+            font-size: .65rem; font-weight: 700; color: #0369a1;
+            background: var(--accent-light); border-radius: 3px;
+            padding: .05rem .35rem; flex-shrink: 0;
+        }
+        .sources-list a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+        .sources-list a:hover { border-bottom-color: var(--accent); }
+        .sources-list li > span:not(.src-id) { font-size: .8rem; color: var(--muted); }
+
+        /* ── Questions ── */
+        .questions-section { background: var(--light); }
+        .question-list { display: flex; flex-direction: column; gap: .65rem; margin-bottom: 2.5rem; }
+        .question-item {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 10px; padding: .9rem 1.25rem;
+            display: flex; gap: 1rem; align-items: flex-start;
+        }
+        .q-num { font-size: .72rem; font-weight: 700; color: var(--accent); min-width: 22px; padding-top: 2px; }
+        .question-item p { font-size: .875rem; color: var(--slate); }
+
+        .next-steps { background: var(--navy); border-radius: 14px; padding: 2.25rem; color: #fff; }
+        .next-steps h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.4rem; }
+        .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.1rem; }
+        .ns-item { background: rgba(255,255,255,.07); border-radius: 10px; padding: 1.2rem; }
+        .ns-item h4 { font-size: .875rem; font-weight: 600; margin-bottom: .35rem; }
+        .ns-item p { font-size: .8rem; color: #94a3b8; }
+
+        /* ── Footer ── */
+        footer {
+            padding: 2rem; text-align: center; font-size: .78rem;
+            color: var(--muted); border-top: 1px solid var(--border);
+        }
+        footer p + p { margin-top: .35rem; }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <span class="nav-brand">Hyperface × SBI Card</span>
+        <ul class="nav-links">
+            <li><a href="#challenge">Challenge</a></li>
+            <li><a href="#structures">Structures</a></li>
+            <li><a href="#recommendation">Recommendation</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#ownership">Ownership</a></li>
+            <li><a href="#collateral">Collateral</a></li>
+            <li><a href="#default">Default</a></li>
+            <li><a href="#audit">Audit</a></li>
+            <li><a href="#failure">Failures</a></li>
+            <li><a href="#compliance">Compliance</a></li>
+            <li><a href="#questions">Next Steps</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <p class="hero-label">Illustrative Operating Model &nbsp;·&nbsp; For Discussion with SBI Card</p>
+        <h1>Proposed Operating Construct for FD-backed SBIC Credit Card</h1>
+        <p class="hero-subtitle">Addressing the structural challenges of separating FD issuance and credit card issuance across entities — using KVB as an illustrative example.</p>
+        <div class="hero-meta">
+            <span>Hyperface Technologies</span>
+            <span>·</span>
+            <span>June 2026</span>
+            <span>·</span>
+            <span>Private and Confidential</span>
+        </div>
+    </div>
+</section>
+
+<!-- Challenge -->
+<section id="challenge">
+    <div class="container">
+        <p class="section-label">The Problem</p>
+        <h2>SBI Card's setup is structurally different from existing market examples</h2>
+        <p class="section-desc">Current FD-backed secured cards (Super.Money, PhonePe Secured Card) work because one bank manages FD issuance, lien marking, and card issuance. SBI Card's proposed construct separates these — creating three challenges without off-the-shelf answers.</p>
+
+        <div style="display:flex;gap:.75rem;align-items:center;margin-bottom:2.5rem;padding:1.1rem 1.4rem;background:var(--light);border:1px solid var(--border);border-radius:10px;">
+            <div style="font-size:.875rem;color:var(--slate);">
+                <strong>Market standard:</strong>&nbsp; FD issuer = Card issuer &nbsp;(same bank)
+            </div>
+            <div style="color:var(--muted);padding:0 .75rem;">vs</div>
+            <div style="font-size:.875rem;color:var(--slate);">
+                <strong>SBI Card's context:</strong>&nbsp; FD issuer &nbsp;≠&nbsp; Card issuer &nbsp;(separate entities)
+            </div>
+        </div>
+
+        <div class="challenge-grid">
+            <div class="challenge-card">
+                <p class="challenge-num">Challenge 01</p>
+                <h3>KYC Ownership and Reliance</h3>
+                <p>Two separately regulated entities. The extent to which an NBFC-CC can rely on a bank's KYC under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a> is not established for a non-cobrand multi-entity structure.</p>
+            </div>
+            <div class="challenge-card">
+                <p class="challenge-num">Challenge 02</p>
+                <h3>Cross-entity Collateral Enforceability</h3>
+                <p>Standard bank lien applies only when the same bank holds the deposit and the credit relationship. SBI Card does not hold KVB's deposit relationship — a different legal mechanism is required.</p>
+            </div>
+            <div class="challenge-card">
+                <p class="challenge-num">Challenge 03</p>
+                <h3>Seamless Customer Onboarding</h3>
+                <p>The customer must interact with two separately regulated entities across one continuous journey — without experiencing it as two separate applications.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Structures -->
+<section id="structures" class="structure-section">
+    <div class="container">
+        <p class="section-label">Structures Under Evaluation</p>
+        <h2>Two potential operating structures</h2>
+        <p class="section-desc">Both structures share the same core challenges. They differ in how tractably those challenges can be addressed.</p>
+
+        <!-- Entity flow diagram -->
+        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">How the three entities connect</p>
+        <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 0 2rem;background:white;">
+            <svg viewBox="0 0 1000 358" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+                <defs>
+                    <marker id="hd-dk" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0 0,10 3.5,0 7" fill="#475569"/></marker>
+                    <marker id="hd-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0 0,10 3.5,0 7" fill="#0284c7"/></marker>
+                    <marker id="hd-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0 0,10 3.5,0 7" fill="#0d9488"/></marker>
+                    <marker id="hd-teal-rev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><polygon points="10 0,0 3.5,10 7" fill="#0d9488"/></marker>
+                </defs>
+
+                <!-- 1. ENTITY RECTS (drawn first = background) -->
+                <rect x="365" y="12" width="270" height="84" rx="10" fill="#0f172a"/>
+                <rect x="10" y="212" width="250" height="112" rx="10" fill="#134e4a"/>
+                <rect x="740" y="212" width="250" height="112" rx="10" fill="#0c4a6e"/>
+                <!-- Hyperface: white box, teal border, central hub -->
+                <rect x="298" y="200" width="404" height="148" rx="12" fill="white" stroke="#0d9488" stroke-width="2.5"/>
+
+                <!-- 2. ARROWS -->
+                <!-- Customer → KVB: "Opens FD at KVB, signs pledge" -->
+                <line x1="418" y1="96" x2="220" y2="212" stroke="#475569" stroke-width="2.5" marker-end="url(#hd-dk)"/>
+                <!-- SBI Card → Customer: "Issues credit card" -->
+                <line x1="782" y1="212" x2="584" y2="96" stroke="#0284c7" stroke-width="2.5" marker-end="url(#hd-blue)"/>
+                <!-- KVB ↔ Hyperface -->
+                <line x1="260" y1="268" x2="298" y2="268" stroke="#0d9488" stroke-width="2.5" marker-end="url(#hd-teal)" marker-start="url(#hd-teal-rev)"/>
+                <!-- SBI Card ↔ Hyperface -->
+                <line x1="740" y1="268" x2="702" y2="268" stroke="#0d9488" stroke-width="2.5" marker-end="url(#hd-teal)" marker-start="url(#hd-teal-rev)"/>
+
+                <!-- 3. ENTITY TEXT -->
+                <!-- Customer -->
+                <text x="500" y="39" text-anchor="middle" font-size="14" font-weight="700" fill="white" font-family="system-ui,-apple-system,sans-serif" letter-spacing=".05em">CUSTOMER</text>
+                <text x="500" y="58" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="system-ui,-apple-system,sans-serif">FD holder · Cardholder</text>
+                <text x="500" y="76" text-anchor="middle" font-size="10.5" fill="#64748b" font-family="system-ui,-apple-system,sans-serif">Initiates journey · eSign pledge authorisation</text>
+
+                <!-- KVB -->
+                <text x="135" y="243" text-anchor="middle" font-size="13.5" font-weight="700" fill="white" font-family="system-ui,-apple-system,sans-serif">KVB</text>
+                <text x="135" y="262" text-anchor="middle" font-size="10.5" fill="#99f6e4" font-family="system-ui,-apple-system,sans-serif">Partner Bank · FD issuer</text>
+                <text x="135" y="279" text-anchor="middle" font-size="10" fill="#5eead4" font-family="system-ui,-apple-system,sans-serif">Pledge custodian · KYC owner</text>
+                <text x="135" y="296" text-anchor="middle" font-size="9.5" fill="#2dd4bf" font-family="system-ui,-apple-system,sans-serif">Executes invocation on SBI Card's instruction</text>
+
+                <!-- SBI Card -->
+                <text x="865" y="243" text-anchor="middle" font-size="13.5" font-weight="700" fill="white" font-family="system-ui,-apple-system,sans-serif">SBI CARD</text>
+                <text x="865" y="262" text-anchor="middle" font-size="10.5" fill="#7dd3fc" font-family="system-ui,-apple-system,sans-serif">NBFC-CC · Card issuer</text>
+                <text x="865" y="279" text-anchor="middle" font-size="10" fill="#bae6fd" font-family="system-ui,-apple-system,sans-serif">Pledge beneficiary · Collections</text>
+                <text x="865" y="296" text-anchor="middle" font-size="9.5" fill="#e0f2fe" font-family="system-ui,-apple-system,sans-serif">Sends invocation instruction to KVB</text>
+
+                <!-- Hyperface content -->
+                <image href="hyperface.png" x="310" y="213" width="158" height="44"/>
+                <line x1="310" y1="266" x2="688" y2="266" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="500" y="287" text-anchor="middle" font-size="10.5" font-weight="600" fill="#334155" font-family="system-ui,-apple-system,sans-serif">Cross-entity orchestration platform</text>
+                <text x="500" y="306" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui,-apple-system,sans-serif">FD &amp; pledge events · Card triggers · KYC routing</text>
+                <text x="500" y="323" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui,-apple-system,sans-serif">Journey management · Event logging · Compliance trail</text>
+                <text x="500" y="341" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0d9488" font-family="system-ui,-apple-system,sans-serif">KVB and SBI Card each integrate once with Hyperface — not directly with each other</text>
+
+                <!-- 4. ARROW LABELS (drawn last = always on top) -->
+                <!-- Label A: Customer → KVB (left floating box) -->
+                <rect x="12" y="134" width="195" height="48" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+                <text x="109" y="154" text-anchor="middle" font-size="11" font-weight="600" fill="#334155" font-family="system-ui,-apple-system,sans-serif">Opens FD at KVB</text>
+                <text x="109" y="172" text-anchor="middle" font-size="10.5" fill="#64748b" font-family="system-ui,-apple-system,sans-serif">Customer signs pledge</text>
+
+                <!-- Label B: SBI Card → Customer (right floating box) -->
+                <rect x="793" y="134" width="200" height="48" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+                <text x="893" y="154" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" font-family="system-ui,-apple-system,sans-serif">Issues credit card</text>
+                <text x="893" y="172" text-anchor="middle" font-size="10.5" fill="#0369a1" font-family="system-ui,-apple-system,sans-serif">Card limit = % of FD value</text>
+            </svg>
+        </div>
+
+        <div class="option-toggle">
+            <button class="toggle-btn active" onclick="showOption(this,'both')">Side by Side</button>
+            <button class="toggle-btn" onclick="showOption(this,'opt1')">Option 1 Only</button>
+            <button class="toggle-btn" onclick="showOption(this,'opt2')">Option 2 Only</button>
+        </div>
+
+        <table class="compare-table" style="margin-bottom:2.5rem;">
+            <thead>
+                <tr>
+                    <th style="width:190px;"></th>
+                    <th class="opt1-col">Option 1 — Non-Cobrand</th>
+                    <th class="opt2-col">Option 2 — Cobrand</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Structure</td>
+                    <td class="opt1-col dimmed">Partner bank issues FD; SBI Card issues standard product</td>
+                    <td class="opt2-col highlight">Cobrand partner bank issues FD; co-branded card by SBI Card</td>
+                </tr>
+                <tr>
+                    <td>Illustrative example</td>
+                    <td class="opt1-col dimmed">KVB FD → SBI Secured Card</td>
+                    <td class="opt2-col highlight">KVB FD → KVB–SBI Secured Card</td>
+                </tr>
+                <tr>
+                    <td>Journey origin</td>
+                    <td class="opt1-col dimmed">SBI Card-led — customer selects SBI Card first, then partner bank</td>
+                    <td class="opt2-col highlight">Partner-bank-linked — customer selects cobrand proposition directly</td>
+                </tr>
+                <tr>
+                    <td>KYC basis</td>
+                    <td class="opt1-col dimmed">Cross-entity reliance with no prior commercial relationship</td>
+                    <td class="opt2-col highlight">Cobrand agreement provides defined commercial basis for sharing</td>
+                </tr>
+                <tr>
+                    <td>Collateral basis</td>
+                    <td class="opt1-col dimmed">Standalone tripartite required per bank — no commercial backbone</td>
+                    <td class="opt2-col highlight">Embeddable within cobrand agreement framework</td>
+                </tr>
+                <tr>
+                    <td>Regulatory fit</td>
+                    <td class="opt1-col dimmed">Less standard; may require additional RBI engagement</td>
+                    <td class="opt2-col highlight">Closer to existing RBI cobrand card framework (MD 2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a></td>
+                </tr>
+                <tr>
+                    <td>Long-term scale</td>
+                    <td class="opt1-col">Multi-bank capable</td>
+                    <td class="opt2-col">Concentrated on one cobrand partner</td>
+                </tr>
+                <tr>
+                    <td>Pilot complexity</td>
+                    <td class="opt1-col dimmed">Higher — new standalone legal and compliance framework required</td>
+                    <td class="opt2-col highlight">Lower — existing cobrand relationship as starting point</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:1rem;">How each option handles the three challenges</h3>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th style="width:190px;">Challenge</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>KYC reliance</td>
+                    <td class="dimmed">Standalone reliance framework required per bank; no prior commercial relationship between entities</td>
+                    <td class="highlight">Cobrand agreement provides defined commercial basis; KYC sharing terms can be contractually embedded</td>
+                </tr>
+                <tr>
+                    <td>Cross-entity collateral</td>
+                    <td class="dimmed">Pledge / tripartite agreement built from scratch per bank; no commercial backbone to anchor KVB's obligations</td>
+                    <td class="highlight">Same legal mechanism required, but embeddable within cobrand agreement — reduces novelty and negotiation complexity</td>
+                </tr>
+                <tr>
+                    <td>Customer journey</td>
+                    <td class="dimmed">Partner-bank selection step mid-journey increases friction and drop-off risk</td>
+                    <td class="highlight">Pre-linked proposition; no mid-journey selection step; trade-off is fixed FD partner</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Recommendation -->
+<section id="recommendation">
+    <div class="container">
+        <p class="section-label">Our View</p>
+        <h2>Recommendation</h2>
+
+        <div class="rec-box">
+            <p class="rec-label">Proposed Approach</p>
+            <p class="rec-headline">Option 2 for the initial pilot — designed with Option 1 extensibility in view</p>
+            <p class="rec-sub">Both options are directionally workable. They differ not in whether the core challenges exist, but in how tractably they can be addressed. Option 2 is the lower-friction path to a validated construct.</p>
+        </div>
+
+        <div class="rationale-grid">
+            <div class="rationale-item">
+                <h4>Addresses the hardest problem more tractably</h4>
+                <p>Cross-entity collateral requires KVB to commit to SBI Card. In Option 2, this can be embedded in the existing cobrand agreement. In Option 1 it must be constructed from scratch with no commercial backbone.</p>
+            </div>
+            <div class="rationale-item">
+                <h4>More defensible KYC reliance basis</h4>
+                <p>The cobrand relationship creates a defined commercial context for KYC sharing. Neither option resolves the NBFC-CC regulatory question — but Option 2 provides a more substantive commercial foundation.</p>
+            </div>
+            <div class="rationale-item">
+                <h4>Simpler journey reduces pilot risk</h4>
+                <p>No mid-journey partner-bank selection. Fewer decision points means lower drop-off and a cleaner experience to validate.</p>
+            </div>
+            <div class="rationale-item">
+                <h4>Better regulatory fit</h4>
+                <p>An FD-backed cobrand card can be anchored in the RBI cobrand card framework (Master Direction, 2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a>. Option 1 is less standard and may require additional regulatory engagement.</p>
+            </div>
+            <div class="rationale-item">
+                <h4>Pilot learnings transfer to Option 1</h4>
+                <p>KYC reliance model, collateral framework, and default handling validated under Option 2 are directionally applicable to Option 1 when SBI Card expands to a multi-bank model.</p>
+            </div>
+        </div>
+        <div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:1.5rem;font-size:.875rem;color:var(--slate);">
+            <strong>Note on long-term architecture:</strong> Option 1 remains better suited to SBI Card's strategic interest in a multi-bank FD network. This is a pilot recommendation — the construct should be designed with Option 1 extensibility in view from the start.
+        </div>
+
+        <div class="caveat-box">
+            <h4>Conditions on this recommendation</h4>
+            <ul class="caveat-list">
+                <li>Existing KVB cobrand agreement requires material amendment to cover FD-backed card specifics, pledge arrangements, and invocation procedures — this is a precondition, not a routine change</li>
+                <li>Cross-entity collateral mechanism requires independent legal validation and is not assumed to be resolved</li>
+                <li>KYC reliance scope requires SBI Card compliance confirmation — Option 2 is directionally simpler, not regulatory-cleared</li>
+                <li>KVB's technical readiness for API-based FD confirmation and pledge marking requires validation before pilot <span class="assum-tag">Assumed capable</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Journey -->
+<section id="journey" class="journey-section">
+    <div class="container">
+        <p class="section-label">Customer Experience</p>
+        <h2>Illustrative customer journey</h2>
+        <p class="section-desc">Both options follow the same core flow. Option 1 adds one extra step mid-journey — partner bank selection — which is the primary source of additional friction.</p>
+
+        <div class="option-toggle" style="margin-bottom:2rem;">
+            <button class="toggle-btn active" onclick="switchJourney(this,'opt2')">Option 2 — Cobrand (7 steps)</button>
+            <button class="toggle-btn" onclick="switchJourney(this,'opt1')">Option 1 — Non-Cobrand (8 steps)</button>
+        </div>
+
+        <!-- Option 2 Journey — all steps visible -->
+        <div id="journey-opt2" class="journey-panel active">
+            <div class="journey-timeline">
+                <div class="jt-step">
+                    <div class="jt-num">1</div>
+                    <div class="jt-content">
+                        <h4>Discover the KVB–SBI co-branded FD-backed card</h4>
+                        <p>Customer sees a single co-branded proposition. FD requirement and minimum amount shown upfront. KVB is pre-selected as the FD bank — no separate bank selection step later.</p>
+                        <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">2</div>
+                    <div class="jt-content">
+                        <h4>Select the card proposition</h4>
+                        <p>Customer proceeds with the co-branded card application. KVB is already the FD partner — nothing to choose.</p>
+                        <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">3</div>
+                    <div class="jt-content">
+                        <h4>Full collateral disclosure — before any funds are committed</h4>
+                        <p>Customer is informed of FD requirement, restriction on FD closure while pledge is active, invocation conditions, and financial implications — including that TDS and premature closure penalties will reduce net recovery below FD face value.</p>
+                        <div class="jt-note">Disclosure must happen here — before FD creation, not after funds are committed.</div>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">4</div>
+                    <div class="jt-content">
+                        <h4>KVB onboarding, KYC, and FD creation</h4>
+                        <p>Customer completes KVB onboarding and KYC. Selects FD amount and tenure. KVB creates the FD and generates an FD reference for downstream pledge creation.</p>
+                        <span class="entity-pill ep-kvb">KVB</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">5</div>
+                    <div class="jt-content">
+                        <h4>Customer consents to KYC sharing with SBI Card</h4>
+                        <p>Customer provides explicit, purpose-limited consent for KYC data to be shared with SBI Card for card issuance. Wording must comply with DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a>, including the right to withdraw consent.</p>
+                        <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">6</div>
+                    <div class="jt-content">
+                        <h4>Pledge authorisation and KVB confirmation</h4>
+                        <p>Customer provides digital eSign authorising the pledge of FD as collateral in favour of SBI Card. KVB marks the FD as pledged and sends confirmation to SBI Card. Card issuance proceeds only after this confirmation.</p>
+                        <span class="entity-pill ep-kvb">KVB</span> <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step jt-final">
+                    <div class="jt-num">7</div>
+                    <div class="jt-content">
+                        <h4>SBI Card issuer check and card issuance</h4>
+                        <p>SBI Card performs issuer-level validation per its credit and compliance policy. On successful validation, card is issued. Card limit is linked to FD amount per SBI Card's applicable credit policy.</p>
+                        <div class="jt-note green">Journey complete. Customer holds a KVB FD and an SBI Card credit card, with pledge in place.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 1 Journey — all steps visible -->
+        <div id="journey-opt1" class="journey-panel">
+            <div class="journey-timeline">
+                <div class="jt-step">
+                    <div class="jt-num">1</div>
+                    <div class="jt-content">
+                        <h4>Discover the SBI Card FD-backed secured card</h4>
+                        <p>Customer sees an SBI Card-branded FD-backed secured card proposition. FD requirement visible upfront. No FD bank has been selected yet — customer will choose one mid-journey.</p>
+                        <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">2</div>
+                    <div class="jt-content">
+                        <h4>Select the SBI Card proposition</h4>
+                        <p>Customer proceeds with the SBI Card application. Partner bank has not been selected at this point.</p>
+                        <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">3</div>
+                    <div class="jt-content">
+                        <h4>Full collateral disclosure — before partner bank selection</h4>
+                        <p>Customer is informed of FD requirement, pledge restriction, invocation conditions, and financial implications — before any bank is selected or funds committed. Same disclosure obligation as Option 2.</p>
+                        <div class="jt-note">Disclosure must happen here — before FD creation.</div>
+                    </div>
+                </div>
+                <div class="jt-step jt-extra">
+                    <div class="jt-num">4</div>
+                    <div class="jt-content">
+                        <h4>Select a partner bank for the FD</h4>
+                        <p>Customer is shown eligible partner bank options and selects one based on FD rate, minimum FD amount, and tenure preferences. This decision point does not exist in Option 2.</p>
+                        <span class="extra-badge">Only in Option 1 — additional friction point</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">5</div>
+                    <div class="jt-content">
+                        <h4>Partner bank onboarding, KYC, and FD creation</h4>
+                        <p>Customer completes onboarding and KYC with the selected partner bank. Selects FD amount and tenure. Partner bank creates the FD and generates an FD reference.</p>
+                        <span class="entity-pill ep-kvb">Partner bank</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">6</div>
+                    <div class="jt-content">
+                        <h4>Customer consents to KYC sharing with SBI Card</h4>
+                        <p>Customer provides DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a>-compliant consent for KYC sharing with SBI Card. In Option 1, there is no pre-existing cobrand relationship between partner bank and SBI Card — the KYC reliance framework must be independently established for each bank.</p>
+                        <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step">
+                    <div class="jt-num">7</div>
+                    <div class="jt-content">
+                        <h4>Pledge authorisation and partner bank confirmation</h4>
+                        <p>Customer eSign authorises the cross-entity pledge in favour of SBI Card. Partner bank marks pledge and sends confirmation. This is a standalone tripartite arrangement — not embedded in a cobrand agreement.</p>
+                        <span class="entity-pill ep-kvb">Partner bank</span> <span class="entity-pill ep-customer">Customer</span>
+                    </div>
+                </div>
+                <div class="jt-step jt-final">
+                    <div class="jt-num">8</div>
+                    <div class="jt-content">
+                        <h4>SBI Card issuer check and card issuance</h4>
+                        <p>SBI Card performs issuer-level validation per its credit and compliance policy. On successful validation, card is issued.</p>
+                        <div class="jt-note green">Journey complete. Customer holds a partner bank FD and an SBI Card credit card, with pledge in place.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Ownership & KYC -->
+<section id="ownership">
+    <div class="container">
+        <p class="section-label">Operating Model</p>
+        <h2>Ownership and KYC model</h2>
+        <p class="section-desc">Each entity owns its regulated product. Hyperface orchestrates the journey across systems. Regulated entities retain ownership and accountability for all regulated activities.</p>
+
+        <table class="ownership-table">
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Proposed Owner</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>FD servicing and communication</td>
+                    <td><span class="owner-tag o-kvb">KVB</span></td>
+                    <td style="color:var(--muted);font-size:.82rem;">FD confirmation, pledge status, maturity notifications</td>
+                </tr>
+                <tr>
+                    <td>Credit card servicing and communication</td>
+                    <td><span class="owner-tag o-sbi">SBI Card</span></td>
+                    <td style="color:var(--muted);font-size:.82rem;">Limit management, billing, collections, card closure</td>
+                </tr>
+                <tr>
+                    <td>Journey orchestration and event logging</td>
+                    <td><span class="owner-tag o-hyp">Hyperface</span></td>
+                    <td style="color:var(--muted);font-size:.82rem;">Technical infrastructure only — KVB and SBI Card retain regulatory accountability</td>
+                </tr>
+                <tr>
+                    <td>Grievance — FD matters</td>
+                    <td><span class="owner-tag o-kvb">KVB</span></td>
+                    <td style="color:var(--muted);font-size:.82rem;">FD-related customer complaints</td>
+                </tr>
+                <tr>
+                    <td>Grievance — Card matters</td>
+                    <td><span class="owner-tag o-sbi">SBI Card</span></td>
+                    <td style="color:var(--muted);font-size:.82rem;">Card-related customer complaints</td>
+                </tr>
+                <tr>
+                    <td>Cross-entity grievance coordination</td>
+                    <td><span class="owner-tag o-tbd">To be defined</span></td>
+                    <td style="color:var(--muted);font-size:.82rem;">Must be defined before launch — not after</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="font-size:1.05rem;font-weight:600;color:var(--navy);margin:.75rem 0 .9rem;">KYC reliance flow</h3>
+        <div class="kyc-flow">
+            <div class="kyc-step">
+                <span class="kyc-step-num">1</span>
+                <p>KVB performs primary customer KYC as part of FD onboarding</p>
+            </div>
+            <div class="kyc-step">
+                <span class="kyc-step-num">2</span>
+                <p>Customer provides DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a>-compliant consent for relevant KYC to be shared with SBI Card — purpose-limited, with withdrawal rights</p>
+            </div>
+            <div class="kyc-step">
+                <span class="kyc-step-num">3</span>
+                <p>SBI Card performs issuer-specific validation in accordance with its credit and compliance policy — scope to be confirmed with SBI Card compliance <span class="assum-tag">Assumed</span></p>
+            </div>
+            <div class="kyc-step">
+                <span class="kyc-step-num">4</span>
+                <p>SBI Card proceeds with card issuance based on applicable policy checks <span class="assum-tag">Assumed</span></p>
+            </div>
+        </div>
+
+        <div class="info-note">
+            <strong>Regulatory note:</strong> The extent to which SBI Card (as an NBFC-CC) may rely on KVB's KYC under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a> — and what issuer-level validation remains mandatory — requires explicit compliance confirmation. The cobrand agreement may provide a more defensible commercial basis for reliance in Option 2, but does not substitute for regulatory sign-off.
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Collateral -->
+<section id="collateral">
+    <div class="container">
+        <p class="section-label">The Hard Part</p>
+        <h2>The collateral construct</h2>
+        <p class="section-desc">Standard bank lien mechanics don't apply cross-entity. A pledge / tripartite arrangement is required — and it's the most structurally novel element of this construct.</p>
+
+        <div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.5rem;margin-bottom:1.5rem;">
+            <p style="font-size:.83rem;font-weight:600;color:var(--slate);margin-bottom:.3rem;">Why a standard bank lien doesn't work here</p>
+            <p style="font-size:.83rem;color:var(--muted);">A bank can only exercise its right of lien over deposits held with itself. SBI Card is not KVB's depositor-creditor — so SBI Card cannot simply "lien-mark" a KVB FD. A different legal mechanism is needed.</p>
+        </div>
+
+        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">How the proposed pledge / tripartite structure works <span class="assum-tag">Proposed — subject to legal validation</span></p>
+        <div class="pledge-steps">
+            <div class="pledge-row">
+                <div class="pledge-num">1</div>
+                <div class="pledge-row-content">
+                    <h4>Customer opens an FD at KVB</h4>
+                    <p>The FD is in the customer's name. KVB holds the funds. By default, only KVB can act on it — SBI Card has no standing here.</p>
+                    <div class="ep"><span class="entity-pill ep-customer">Customer</span> <span class="entity-pill ep-kvb">KVB</span></div>
+                </div>
+            </div>
+            <div class="pledge-row">
+                <div class="pledge-num">2</div>
+                <div class="pledge-row-content">
+                    <h4>Customer pledges the FD in favour of SBI Card</h4>
+                    <p>The customer signs a pledge document giving SBI Card the legal right to instruct KVB to break the FD in the event of a credit card default. The customer cannot withdraw or close the FD while the pledge is active.</p>
+                    <div class="ep"><span class="entity-pill ep-customer">Customer signs</span> <span class="entity-pill ep-sbi">SBI Card is beneficiary</span></div>
+                </div>
+            </div>
+            <div class="pledge-row">
+                <div class="pledge-num">3</div>
+                <div class="pledge-row-content">
+                    <h4>KVB acknowledges the pledge and commits to honour it</h4>
+                    <p>KVB signs a tripartite agreement: it marks the FD as restricted and agrees that if SBI Card sends an invocation instruction, KVB will break the FD and remit proceeds. In Option 2, this is embedded in the cobrand agreement. In Option 1, it must be negotiated from scratch with each partner bank.</p>
+                    <div class="ep"><span class="entity-pill ep-kvb">KVB commits</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:.9rem;font-weight:600;color:var(--navy);margin:1.25rem 0 .75rem;">Illustrative legal mechanisms — subject to independent legal review</h3>
+        <div class="mechanism-grid">
+            <div class="mechanism-card">
+                <h4>Pledge of FD Receipt (FDR)</h4>
+                <p>Customer pledges the FD certificate to SBI Card. KVB acknowledges and agrees to honour invocation instructions.</p>
+            </div>
+            <div class="mechanism-card">
+                <h4>Tripartite Agreement</h4>
+                <p>Three-party arrangement between Customer, KVB, and SBI Card. KVB contractually commits to FD closure and remittance on SBI Card's request.</p>
+            </div>
+            <div class="mechanism-card">
+                <h4>Assignment of Proceeds</h4>
+                <p>Customer assigns the right to FD proceeds to SBI Card for the duration of the arrangement.</p>
+            </div>
+        </div>
+
+        <div class="legal-note">
+            Specific legal mechanism to be determined through independent legal review. Enforceability under Indian law — including in insolvency or dispute scenarios — must be confirmed before this construct is progressed. This document does not constitute legal advice.
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Default Handling -->
+<section id="default">
+    <div class="container">
+        <p class="section-label">Default Handling</p>
+        <h2>Lien invocation and default handling</h2>
+        <p class="section-desc">The invocation process is triggered by SBI Card and executed by KVB. Net proceeds after deductions are remitted to SBI Card; any residual outstanding follows standard recovery.</p>
+
+        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">Invocation flow</p>
+        <div class="pledge-steps" style="margin-bottom:1.75rem;">
+            <div class="pledge-row">
+                <div class="pledge-num">1</div>
+                <div class="pledge-row-content">
+                    <h4>Customer crosses agreed delinquency threshold</h4>
+                    <p>SBI Card initiates customer communication and allows a cure period. Invocation does not proceed until the cure period has expired without resolution.</p>
+                    <div class="ep"><span class="entity-pill ep-sbi">SBI Card</span></div>
+                </div>
+            </div>
+            <div class="pledge-row">
+                <div class="pledge-num">2</div>
+                <div class="pledge-row-content">
+                    <h4>SBI Card raises invocation request to KVB</h4>
+                    <p>On expiry of cure period without resolution, SBI Card sends a formal invocation instruction to KVB, referencing the pledge and the outstanding dues.</p>
+                    <div class="ep"><span class="entity-pill ep-sbi">SBI Card</span> <span class="entity-pill ep-kvb">KVB receives</span></div>
+                </div>
+            </div>
+            <div class="pledge-row">
+                <div class="pledge-num">3</div>
+                <div class="pledge-row-content">
+                    <h4>KVB forecloses the FD and calculates net proceeds</h4>
+                    <p>KVB breaks the FD, deducts applicable TDS and premature closure penalty, and calculates net proceeds available for remittance. Net proceeds will be below FD face value.</p>
+                    <div class="ep"><span class="entity-pill ep-kvb">KVB</span></div>
+                </div>
+            </div>
+            <div class="pledge-row">
+                <div class="pledge-num">4</div>
+                <div class="pledge-row-content">
+                    <h4>KVB remits proceeds; residual follows SBI Card recovery</h4>
+                    <p>KVB remits net proceeds to SBI Card within the agreed SLA. If outstanding dues exceed net proceeds, the residual balance follows SBI Card's standard recovery process.</p>
+                    <div class="ep"><span class="entity-pill ep-kvb">KVB</span> <span class="entity-pill ep-sbi">SBI Card</span></div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">Illustrative scenarios</p>
+        <table class="ownership-table" style="margin-bottom:1.25rem;">
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Proposed handling</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Outstanding lower than net FD proceeds</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Partial recovery from FD; remaining FD balance released to customer</td>
+                </tr>
+                <tr>
+                    <td>Outstanding equals net FD proceeds</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Full FD applied; account closed</td>
+                </tr>
+                <tr>
+                    <td>Outstanding exceeds net FD proceeds</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Full FD applied; residual follows SBI Card standard recovery process</td>
+                </tr>
+                <tr>
+                    <td>Customer requests FD closure with active pledge</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB declines closure; customer directed to SBI Card to discharge pledge via card closure or outstanding settlement</td>
+                </tr>
+                <tr>
+                    <td>FD matures during active card period</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Customer notified ~30 days in advance <span class="assum-tag">Illustrative</span>; invited to renew FD to maintain card limit; limit suspended on non-renewal. Specific handling to be jointly defined.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-note">
+            <strong>Credit bureau reporting:</strong> Treatment of pledge invocation — whether reported as settled or written off — has material implications for the customer's credit profile. This requires explicit SBI Card compliance guidance before pilot.
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Audit & Governance -->
+<section id="audit">
+    <div class="container">
+        <p class="section-label">Governance</p>
+        <h2>Audit trail and governance</h2>
+        <p class="section-desc">KVB and SBI Card own and are accountable for their respective regulated audit records. Hyperface may provide supporting event logs for the orchestration layer, subject to data governance agreements.</p>
+
+        <table class="ownership-table" style="margin-bottom:1.5rem;">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Proposed owner</th>
+                    <th>Record</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Collateral disclosure confirmed</td>
+                    <td><span class="owner-tag o-kvb">KVB</span> <span class="owner-tag o-hyp">Hyperface</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">Disclosure acknowledgement + timestamp</td>
+                </tr>
+                <tr>
+                    <td>Customer consent — KYC sharing</td>
+                    <td><span class="owner-tag o-kvb">KVB</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">DPDP-compliant consent capture + timestamp</td>
+                </tr>
+                <tr>
+                    <td>Customer consent — Pledge authorisation</td>
+                    <td><span class="owner-tag o-kvb">KVB</span> <span class="owner-tag o-sbi">SBI Card</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">eSign / digital consent log + timestamp</td>
+                </tr>
+                <tr>
+                    <td>FD creation confirmed</td>
+                    <td><span class="owner-tag o-kvb">KVB</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">FD reference + creation confirmation</td>
+                </tr>
+                <tr>
+                    <td>Pledge marked and confirmed</td>
+                    <td><span class="owner-tag o-kvb">KVB</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">Pledge confirmation + timestamp</td>
+                </tr>
+                <tr>
+                    <td>Card issued</td>
+                    <td><span class="owner-tag o-sbi">SBI Card</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">Issuance status + timestamp</td>
+                </tr>
+                <tr>
+                    <td>Invocation (if applicable)</td>
+                    <td><span class="owner-tag o-sbi">SBI Card</span> <span class="owner-tag o-kvb">KVB</span></td>
+                    <td style="font-size:.82rem;color:var(--muted);">Invocation request, FD closure, TDS deducted, net proceeds, remittance confirmation</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-note">
+            <strong>RBI IT Outsourcing (2023):</strong> Hyperface's orchestration role must be assessed against the RBI IT Outsourcing Master Direction (2023)<a class="src-chip" href="#sources" title="Master Direction on Outsourcing of IT Services, 2023">S4</a>. KVB and SBI Card must retain control and accountability for all regulated activities, maintain the ability to operate independently of Hyperface availability, and define fallback procedures as part of the outsourcing compliance assessment.
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Failure Modes -->
+<section id="failure">
+    <div class="container">
+        <p class="section-label">Contingency Handling</p>
+        <h2>Failure modes and contingency handling</h2>
+        <p class="section-desc">Illustrative handling for key failure scenarios. All of these require joint definition before pilot — they cannot be left as open items at launch.</p>
+
+        <table class="ownership-table" style="margin-bottom:1.5rem;">
+            <thead>
+                <tr>
+                    <th style="width:200px;">Failure scenario</th>
+                    <th>Proposed handling</th>
+                    <th style="width:200px;">Proposed owner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">FD created; SBI Card issuer check fails</td>
+                    <td style="font-size:.83rem;color:var(--muted);">SBI Card notifies customer of non-issuance. KVB notified to release pledge restriction. Customer may retain FD or request closure. SBI Card defines customer communication timeline.</td>
+                    <td><span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">communication</span> <span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">pledge release</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Pledge marking fails at KVB (technical / operational)</td>
+                    <td style="font-size:.83rem;color:var(--muted);">FD creation confirmed but pledge not confirmed. Card issuance does not proceed. Customer notified of delay. Retry or manual resolution within agreed SLA.</td>
+                    <td><span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">resolution</span> <span class="owner-tag o-hyp">Hyperface</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">event log alert</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Customer withdraws consent before pledge creation</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Pledge not created. Customer notified that card issuance requires pledge consent. Customer may retain or close FD at their discretion.</td>
+                    <td><span class="owner-tag o-sbi">SBI Card</span> <span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">joint communication</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Customer requests FD closure with active pledge</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB declines closure and directs customer to SBI Card. Customer informed that FD can be released only upon pledge discharge via card closure or outstanding settlement.</td>
+                    <td><span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">decline</span> <span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">guidance</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">FD matures during active card period</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB notifies customer ~30 days before maturity <span class="assum-tag">Illustrative</span>. Customer invited to renew FD to maintain card limit. If not renewed within agreed period, card limit suspended. Suspension vs. cancellation to be jointly defined.</td>
+                    <td><span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">maturity notification</span> <span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">card limit action</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Hyperface system unavailability</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB and SBI Card must maintain the ability to continue regulated operations independent of Hyperface availability. Fallback operational procedures to be defined as part of the outsourcing compliance assessment.</td>
+                    <td><span class="owner-tag o-kvb">KVB</span> <span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">fallback procedures</span> <span class="owner-tag o-hyp">Hyperface</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">SLA + continuity</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- RBI / Compliance Considerations -->
+<section id="compliance">
+    <div class="container">
+        <p class="section-label">Regulatory</p>
+        <h2>RBI / Compliance considerations</h2>
+        <p class="section-desc">These areas require joint validation with SBI Card, KVB, and legal / compliance stakeholders. This is not an exhaustive list and does not constitute a regulatory opinion.</p>
+
+        <table class="ownership-table" style="margin-bottom:1.5rem;">
+            <thead>
+                <tr>
+                    <th style="width:220px;">Area</th>
+                    <th>Key question for validation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">KYC reliance (NBFC-CC)</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Extent of reliance permissible for SBI Card on KVB's KYC under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a>; what issuer-specific validation remains mandatory and cannot be delegated to KVB</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Cross-entity collateral</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Legal enforceability of pledge / tripartite arrangement across separately regulated entities; whether the cobrand agreement can serve as the commercial backbone for KVB's obligations to SBI Card <span class="assum-tag">Assumed in Option 2</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Customer disclosures and consent</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Required disclosures under RBI credit card guidelines; DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a> compliance for cross-entity KYC data sharing — purpose limitation, data minimisation, and withdrawal rights</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Cobrand card framework (Option 2)</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Validation against RBI Master Direction on Credit Card and Debit Card Operations (2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a>, including co-branding provisions and permissible activities for the cobrand partner</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">IT outsourcing (Hyperface)</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Hyperface's orchestration role assessed against RBI IT Outsourcing Master Direction (2023)<a class="src-chip" href="#sources" title="Master Direction on Outsourcing of IT Services, 2023">S4</a>; KVB and SBI Card must retain control and accountability for all regulated activities and must be able to operate independently of Hyperface</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600;color:var(--navy);">Grievance redressal</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Delineation of servicing ownership for cross-entity complaints; applicability of RBI Integrated Ombudsman Scheme to this construct — must be defined before launch, not after</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-note">
+            Option 2 is directionally simpler from a regulatory standpoint — not regulatory-cleared. None of the above items can be assumed resolved. All require explicit sign-off from SBI Card compliance and, where applicable, from KVB and legal counsel.
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Questions + Next Steps -->
+<section id="questions" class="questions-section">
+    <div class="container">
+        <p class="section-label">For Discussion</p>
+        <h2>Open questions and next steps</h2>
+        <p class="section-desc">Key areas where joint alignment is required before this construct can be progressed to pilot.</p>
+
+        <div class="question-list" style="margin-bottom:2rem;">
+            <div class="question-item">
+                <span class="q-num">Q1</span>
+                <p>Does SBI Card prefer Option 2 for the initial pilot, or is there a strategic reason to proceed with Option 1 directly?</p>
+            </div>
+            <div class="question-item">
+                <span class="q-num">Q2</span>
+                <p>To what extent can KVB's KYC be relied upon by SBI Card under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a>, and what issuer-level validation remains mandatory?</p>
+            </div>
+            <div class="question-item">
+                <span class="q-num">Q3</span>
+                <p>What is the preferred legal mechanism for cross-entity collateral — pledge, assignment, or tripartite arrangement — and what legal review process is envisaged?</p>
+            </div>
+            <div class="question-item">
+                <span class="q-num">Q4</span>
+                <p>What amendments to the existing KVB cobrand agreement are required to cover FD-backed card and pledge specifics, and who leads that process?</p>
+            </div>
+            <div class="question-item">
+                <span class="q-num">Q5</span>
+                <p>What delinquency threshold and cure period should govern pledge invocation, and who owns customer communication at each stage?</p>
+            </div>
+            <div class="question-item">
+                <span class="q-num">Q6</span>
+                <p>How should FD maturity during an active card lifecycle be handled — mandatory renewal, limit suspension, or card cancellation?</p>
+            </div>
+            <div class="question-item">
+                <span class="q-num">Q7</span>
+                <p>What credit bureau reporting treatment is intended for pledge invocation scenarios — settled or written off?</p>
+            </div>
+        </div>
+
+        <div class="next-steps">
+            <h3>Prerequisites before pilot can be initiated</h3>
+            <div class="steps-grid" style="grid-template-columns:repeat(5,1fr);">
+                <div class="ns-item">
+                    <h4>Legal</h4>
+                    <p>Cobrand agreement amendment covering FD-backed card, pledge construct, and invocation procedures</p>
+                </div>
+                <div class="ns-item">
+                    <h4>Compliance</h4>
+                    <p>SBI Card and KVB sign-off on KYC reliance scope, collateral arrangement, and customer disclosure framework</p>
+                </div>
+                <div class="ns-item">
+                    <h4>Technology</h4>
+                    <p>API integration across KVB, SBI Card, and Hyperface for FD confirmation, pledge marking, and event logging</p>
+                </div>
+                <div class="ns-item">
+                    <h4>Product</h4>
+                    <p>DPDP-compliant consent language; customer communication templates for FD maturity and invocation scenarios</p>
+                </div>
+                <div class="ns-item">
+                    <h4>Operations</h4>
+                    <p>Defined SLAs for pledge confirmation, card issuance, and invocation settlement; cross-entity grievance process</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="sources" style="background:var(--light-bg);padding:2rem 0 1.5rem;">
+    <div class="container">
+        <p class="section-label">References</p>
+        <h2 style="margin-bottom:1rem;">Source documents</h2>
+        <div class="sources-box">
+            <ul class="sources-list">
+                <li><span class="src-id">S1</span> <span><strong><a href="https://www.meity.gov.in/content/digital-personal-data-protection-act-2023" target="_blank" rel="noopener">Digital Personal Data Protection Act, 2023</a></strong> — Ministry of Electronics and Information Technology, Govt. of India. Governs consent requirements for processing and sharing personal data, including cross-entity KYC data sharing.</span></li>
+                <li><span class="src-id">S2</span> <span><strong><a href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=11566" target="_blank" rel="noopener">Master Direction – Know Your Customer (KYC) Direction, 2016</a></strong> (as updated) — Reserve Bank of India. Sets out KYC norms for regulated entities, including NBFC-CCs, and the scope of KYC reliance on third parties.</span></li>
+                <li><span class="src-id">S3</span> <span><strong><a href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12300" target="_blank" rel="noopener">Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022</a></strong> — Reserve Bank of India. Governs credit card issuance, co-branding arrangements, and permissible activities for co-brand partners.</span></li>
+                <li><span class="src-id">S4</span> <span><strong><a href="https://www.rbi.org.in/scripts/BS_ViewMasDirections.aspx?id=12486" target="_blank" rel="noopener">Master Direction on Outsourcing of Information Technology Services, 2023</a></strong> — Reserve Bank of India. Sets out requirements for regulated entities outsourcing IT activities, including accountability, control, and business continuity obligations.</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Private and Confidential &nbsp;·&nbsp; Hyperface Technologies Pvt. Ltd. &nbsp;·&nbsp; Prepared for discussion with SBI Card &nbsp;·&nbsp; June 2026</p>
+    <p>This document is illustrative and intended for discussion purposes only. It does not constitute legal, compliance, or regulatory advice.</p>
+</footer>
+
+<script>
+    // ── Journey tab toggle ──
+    function switchJourney(btn, which) {
+        document.querySelectorAll('#journey .toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.journey-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('journey-' + which).classList.add('active');
+    }
+
+    // ── Option toggle ──
+    function showOption(btn, view) {
+        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.opt1-col').forEach(el => {
+            el.style.display = (view === 'opt2') ? 'none' : '';
+        });
+        document.querySelectorAll('.opt2-col').forEach(el => {
+            el.style.display = (view === 'opt1') ? 'none' : '';
+        });
+    }
+
+    // ── Smooth scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
+</body>
+</html>
