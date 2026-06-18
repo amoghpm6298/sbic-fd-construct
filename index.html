@@ -410,8 +410,8 @@
 <section class="hero">
     <div class="container">
         <p class="hero-label">Illustrative Operating Model &nbsp;·&nbsp; For Discussion with SBI Card</p>
-        <h1>Proposed Operating Construct for FD-backed SBIC Credit Card</h1>
-        <p class="hero-subtitle">Addressing the structural challenges of separating FD issuance and credit card issuance across entities — using KVB as an illustrative example.</p>
+        <h1>How to build an FD-backed SBI Card credit card when the FD and the card come from two different companies</h1>
+        <p class="hero-subtitle">Most secured cards work because one bank holds your Fixed Deposit (FD) and also issues your credit card. Here, KVB holds the FD and SBI Card issues the credit card — two separate regulated entities. This document explains the challenges that creates, and how they can be solved.</p>
         <div class="hero-meta">
             <span>Hyperface Technologies</span>
             <span>·</span>
@@ -426,34 +426,34 @@
 <section id="challenge">
     <div class="container">
         <p class="section-label">The Problem</p>
-        <h2>SBI Card's setup is structurally different from existing market examples</h2>
-        <p class="section-desc">Current FD-backed secured cards (Super.Money, PhonePe Secured Card) work because one bank manages FD issuance, lien marking, and card issuance. SBI Card's proposed construct separates these — creating three challenges without off-the-shelf answers.</p>
+        <h2>SBI Card's setup is different from every other secured card in the market</h2>
+        <p class="section-desc">Other FD-backed secured cards — like Super.Money and PhonePe Secured Card — work because one bank does everything: it holds your Fixed Deposit and issues the credit card. Here, KVB holds the FD and SBI Card issues the card. That separation creates three challenges that have no ready-made solution.</p>
 
         <div style="display:flex;gap:.75rem;align-items:center;margin-bottom:2.5rem;padding:1.1rem 1.4rem;background:var(--light);border:1px solid var(--border);border-radius:10px;">
             <div style="font-size:.875rem;color:var(--slate);">
-                <strong>Market standard:</strong>&nbsp; FD issuer = Card issuer &nbsp;(same bank)
+                <strong>How the market works today:</strong>&nbsp; The same bank holds your FD <em>and</em> issues your credit card
             </div>
             <div style="color:var(--muted);padding:0 .75rem;">vs</div>
             <div style="font-size:.875rem;color:var(--slate);">
-                <strong>SBI Card's context:</strong>&nbsp; FD issuer &nbsp;≠&nbsp; Card issuer &nbsp;(separate entities)
+                <strong>This construct:</strong>&nbsp; KVB holds the FD &nbsp;·&nbsp; SBI Card issues the credit card &nbsp;(two different companies)
             </div>
         </div>
 
         <div class="challenge-grid">
             <div class="challenge-card">
                 <p class="challenge-num">Challenge 01</p>
-                <h3>KYC Ownership and Reliance</h3>
-                <p>Two separately regulated entities. The extent to which an NBFC-CC can rely on a bank's KYC under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a> is not established for a non-cobrand multi-entity structure.</p>
+                <h3>Who verifies the customer's identity — and can one company rely on the other's work?</h3>
+                <p>KVB will verify the customer's identity when opening the FD (this is called KYC — Know Your Customer). SBI Card, which is separately regulated as a card-issuing company, may need to rely on that verification rather than starting from scratch. But how much SBI Card can legally rely on KVB's KYC — without doing its own full check — isn't clearly defined in RBI guidelines for this type of arrangement.<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a></p>
             </div>
             <div class="challenge-card">
                 <p class="challenge-num">Challenge 02</p>
-                <h3>Cross-entity Collateral Enforceability</h3>
-                <p>Standard bank lien applies only when the same bank holds the deposit and the credit relationship. SBI Card does not hold KVB's deposit relationship — a different legal mechanism is required.</p>
+                <h3>How can SBI Card use the FD as security if it doesn't hold it?</h3>
+                <p>Normally, if a customer stops paying, a bank can freeze or break their Fixed Deposit to recover the dues — this right is called a lien. It only works when the same bank holds both the deposit and the credit. Here, KVB holds the FD but SBI Card has the credit relationship. SBI Card cannot simply freeze a KVB deposit — a different legal arrangement is needed.</p>
             </div>
             <div class="challenge-card">
                 <p class="challenge-num">Challenge 03</p>
-                <h3>Seamless Customer Onboarding</h3>
-                <p>The customer must interact with two separately regulated entities across one continuous journey — without experiencing it as two separate applications.</p>
+                <h3>Making it feel like one application, not two</h3>
+                <p>The customer needs to open an FD with KVB and apply for a credit card with SBI Card — two separate companies with separate regulated processes. The goal is to make this feel like one smooth, connected experience rather than two separate applications.</p>
             </div>
         </div>
     </div>
@@ -465,8 +465,8 @@
 <section id="structures" class="structure-section">
     <div class="container">
         <p class="section-label">Structures Under Evaluation</p>
-        <h2>Two potential operating structures</h2>
-        <p class="section-desc">Both structures share the same core challenges. They differ in how tractably those challenges can be addressed.</p>
+        <h2>Two ways to structure this</h2>
+        <p class="section-desc">Both options have the same underlying challenges. The difference is how easily — and how cheaply — those challenges can be resolved in practice.</p>
 
         <!-- Entity flow diagram -->
         <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">How the three entities connect</p>
@@ -562,18 +562,18 @@
                 </tr>
                 <tr>
                     <td>Journey origin</td>
-                    <td class="opt1-col dimmed">SBI Card-led — customer selects SBI Card first, then partner bank</td>
-                    <td class="opt2-col highlight">Partner-bank-linked — customer selects cobrand proposition directly</td>
+                    <td class="opt1-col dimmed">Customer picks SBI Card first, then picks a partner bank for the FD mid-journey</td>
+                    <td class="opt2-col highlight">Customer picks the KVB–SBI cobrand card directly — KVB is already pre-selected</td>
                 </tr>
                 <tr>
                     <td>KYC basis</td>
-                    <td class="opt1-col dimmed">Cross-entity reliance with no prior commercial relationship</td>
-                    <td class="opt2-col highlight">Cobrand agreement provides defined commercial basis for sharing</td>
+                    <td class="opt1-col dimmed">No prior relationship between banks — KYC sharing framework must be built from scratch</td>
+                    <td class="opt2-col highlight">Existing cobrand agreement gives a legal basis for KVB to share KYC with SBI Card</td>
                 </tr>
                 <tr>
                     <td>Collateral basis</td>
-                    <td class="opt1-col dimmed">Standalone tripartite required per bank — no commercial backbone</td>
-                    <td class="opt2-col highlight">Embeddable within cobrand agreement framework</td>
+                    <td class="opt1-col dimmed">Legal security arrangement must be negotiated from scratch for each new partner bank</td>
+                    <td class="opt2-col highlight">Can be added to the existing KVB–SBI Card cobrand agreement</td>
                 </tr>
                 <tr>
                     <td>Regulatory fit</td>
@@ -604,19 +604,19 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>KYC reliance</td>
-                    <td class="dimmed">Standalone reliance framework required per bank; no prior commercial relationship between entities</td>
-                    <td class="highlight">Cobrand agreement provides defined commercial basis; KYC sharing terms can be contractually embedded</td>
+                    <td>Identity verification (KYC)</td>
+                    <td class="dimmed">A new KYC-sharing framework must be built for each partner bank — there's no existing agreement to build on</td>
+                    <td class="highlight">The existing cobrand agreement can include KYC-sharing rules — no need to start from scratch</td>
                 </tr>
                 <tr>
-                    <td>Cross-entity collateral</td>
-                    <td class="dimmed">Pledge / tripartite agreement built from scratch per bank; no commercial backbone to anchor KVB's obligations</td>
-                    <td class="highlight">Same legal mechanism required, but embeddable within cobrand agreement — reduces novelty and negotiation complexity</td>
+                    <td>Using the FD as security</td>
+                    <td class="dimmed">A legal pledge arrangement must be negotiated separately with each bank, from scratch, with no existing contract as a foundation</td>
+                    <td class="highlight">Same legal arrangement required, but it can be added into the existing cobrand agreement — simpler to negotiate</td>
                 </tr>
                 <tr>
-                    <td>Customer journey</td>
-                    <td class="dimmed">Partner-bank selection step mid-journey increases friction and drop-off risk</td>
-                    <td class="highlight">Pre-linked proposition; no mid-journey selection step; trade-off is fixed FD partner</td>
+                    <td>Customer experience</td>
+                    <td class="dimmed">Customer must choose a partner bank mid-journey — extra decision point, higher chance of drop-off</td>
+                    <td class="highlight">KVB is pre-selected; customer doesn't choose a bank mid-journey. Trade-off: KVB is the only FD option</td>
                 </tr>
             </tbody>
         </table>
@@ -634,42 +634,42 @@
         <div class="rec-box">
             <p class="rec-label">Proposed Approach</p>
             <p class="rec-headline">Option 2 for the initial pilot — designed with Option 1 extensibility in view</p>
-            <p class="rec-sub">Both options are directionally workable. They differ not in whether the core challenges exist, but in how tractably they can be addressed. Option 2 is the lower-friction path to a validated construct.</p>
+            <p class="rec-sub">Both options can work. The challenges are the same in both — what differs is how hard each challenge is to solve. Option 2 is the simpler path to proving this concept works.</p>
         </div>
 
         <div class="rationale-grid">
             <div class="rationale-item">
-                <h4>Addresses the hardest problem more tractably</h4>
-                <p>Cross-entity collateral requires KVB to commit to SBI Card. In Option 2, this can be embedded in the existing cobrand agreement. In Option 1 it must be constructed from scratch with no commercial backbone.</p>
+                <h4>Solves the hardest problem more easily</h4>
+                <p>Getting KVB to formally commit to acting on SBI Card's instructions (breaking the FD if the customer defaults) is the hardest part. In Option 2, this commitment can be added to the existing cobrand agreement between KVB and SBI Card. In Option 1, an entirely new legal arrangement must be negotiated from scratch.</p>
             </div>
             <div class="rationale-item">
-                <h4>More defensible KYC reliance basis</h4>
-                <p>The cobrand relationship creates a defined commercial context for KYC sharing. Neither option resolves the NBFC-CC regulatory question — but Option 2 provides a more substantive commercial foundation.</p>
+                <h4>Stronger basis for sharing customer identity data</h4>
+                <p>Because KVB and SBI Card already have a cobrand relationship, there's a more credible legal basis for KVB to share customer identity information with SBI Card. Neither option fully resolves the regulatory question — but Option 2 has stronger footing going in.</p>
             </div>
             <div class="rationale-item">
-                <h4>Simpler journey reduces pilot risk</h4>
-                <p>No mid-journey partner-bank selection. Fewer decision points means lower drop-off and a cleaner experience to validate.</p>
+                <h4>Simpler experience means fewer customers drop off</h4>
+                <p>The customer never has to choose a bank mid-application. Fewer decision points = lower drop-off and a cleaner experience to test and learn from.</p>
             </div>
             <div class="rationale-item">
-                <h4>Better regulatory fit</h4>
-                <p>An FD-backed cobrand card can be anchored in the RBI cobrand card framework (Master Direction, 2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a>. Option 1 is less standard and may require additional regulatory engagement.</p>
+                <h4>Closer fit with existing RBI rules</h4>
+                <p>An FD-backed co-branded card can be anchored within RBI's existing framework for co-branded credit cards (2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a>. Option 1 sits outside existing frameworks and would need more regulatory groundwork.</p>
             </div>
             <div class="rationale-item">
-                <h4>Pilot learnings transfer to Option 1</h4>
-                <p>KYC reliance model, collateral framework, and default handling validated under Option 2 are directionally applicable to Option 1 when SBI Card expands to a multi-bank model.</p>
+                <h4>Pilot learnings apply to Option 1 later</h4>
+                <p>Everything validated in the Option 2 pilot — how identity sharing works, how the FD security arrangement holds up, how defaults are handled — can be applied when SBI Card expands to a multi-bank model under Option 1.</p>
             </div>
         </div>
         <div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:1.5rem;font-size:.875rem;color:var(--slate);">
-            <strong>Note on long-term architecture:</strong> Option 1 remains better suited to SBI Card's strategic interest in a multi-bank FD network. This is a pilot recommendation — the construct should be designed with Option 1 extensibility in view from the start.
+            <strong>Long-term view:</strong> Option 1 — where SBI Card works with multiple FD banks, not just KVB — is the better fit for SBI Card's long-term goal of a broad FD network. This recommendation is for the pilot only. The design should be built from the start with Option 1 expansion in mind, so it doesn't need to be rebuilt later.
         </div>
 
         <div class="caveat-box">
             <h4>Conditions on this recommendation</h4>
             <ul class="caveat-list">
-                <li>Existing KVB cobrand agreement requires material amendment to cover FD-backed card specifics, pledge arrangements, and invocation procedures — this is a precondition, not a routine change</li>
-                <li>Cross-entity collateral mechanism requires independent legal validation and is not assumed to be resolved</li>
-                <li>KYC reliance scope requires SBI Card compliance confirmation — Option 2 is directionally simpler, not regulatory-cleared</li>
-                <li>KVB's technical readiness for API-based FD confirmation and pledge marking requires validation before pilot <span class="assum-tag">Assumed capable</span></li>
+                <li>The existing KVB–SBI Card cobrand agreement must be significantly updated to cover FD-backed card terms, the pledge arrangement, and what happens if a customer defaults. This is a major legal change — not a paperwork update.</li>
+                <li>The legal arrangement for using the FD as security across two separate entities requires independent legal review. It cannot be assumed to be straightforward.</li>
+                <li>SBI Card's compliance team must formally confirm exactly how much of KVB's identity verification it can rely on. Option 2 is simpler — but it's not yet regulatory-approved.</li>
+                <li>KVB must be technically capable of confirming FD creation and marking pledges via API (automated data connections). This needs to be tested before the pilot begins. <span class="assum-tag">Assumed capable</span></li>
             </ul>
         </div>
     </div>
@@ -711,9 +711,9 @@
                 <div class="jt-step">
                     <div class="jt-num">3</div>
                     <div class="jt-content">
-                        <h4>Full collateral disclosure — before any funds are committed</h4>
-                        <p>Customer is informed of FD requirement, restriction on FD closure while pledge is active, invocation conditions, and financial implications — including that TDS and premature closure penalties will reduce net recovery below FD face value.</p>
-                        <div class="jt-note">Disclosure must happen here — before FD creation, not after funds are committed.</div>
+                        <h4>Full disclosure — before the customer puts any money down</h4>
+                        <p>Before opening the FD, the customer must be clearly told: (a) the minimum FD amount required, (b) they cannot close the FD while their credit card is active, (c) if they stop paying the card bill, the FD will be broken to recover the dues, and (d) breaking an FD early comes with tax deductions and penalties — so SBI Card may recover less than the full FD amount.</p>
+                        <div class="jt-note">This disclosure must happen before the FD is created — not after the customer has already deposited money.</div>
                     </div>
                 </div>
                 <div class="jt-step">
@@ -727,25 +727,25 @@
                 <div class="jt-step">
                     <div class="jt-num">5</div>
                     <div class="jt-content">
-                        <h4>Customer consents to KYC sharing with SBI Card</h4>
-                        <p>Customer provides explicit, purpose-limited consent for KYC data to be shared with SBI Card for card issuance. Wording must comply with DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a>, including the right to withdraw consent.</p>
+                        <h4>Customer gives permission for their identity data to be shared with SBI Card</h4>
+                        <p>The customer gives explicit permission for KVB to share their identity documents with SBI Card — only for the purpose of issuing the credit card. The customer is told they can withdraw this permission at any time. This follows India's data privacy law (DPDP Act, 2023).<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a></p>
                         <span class="entity-pill ep-customer">Customer</span>
                     </div>
                 </div>
                 <div class="jt-step">
                     <div class="jt-num">6</div>
                     <div class="jt-content">
-                        <h4>Pledge authorisation and KVB confirmation</h4>
-                        <p>Customer provides digital eSign authorising the pledge of FD as collateral in favour of SBI Card. KVB marks the FD as pledged and sends confirmation to SBI Card. Card issuance proceeds only after this confirmation.</p>
+                        <h4>Customer authorises the pledge; KVB locks the FD</h4>
+                        <p>The customer digitally signs a document giving SBI Card the legal right to break the FD if the credit card goes unpaid. KVB then marks the FD as locked (pledged) and sends confirmation to SBI Card. The credit card is only issued after this confirmation is received.</p>
                         <span class="entity-pill ep-kvb">KVB</span> <span class="entity-pill ep-customer">Customer</span>
                     </div>
                 </div>
                 <div class="jt-step jt-final">
                     <div class="jt-num">7</div>
                     <div class="jt-content">
-                        <h4>SBI Card issuer check and card issuance</h4>
-                        <p>SBI Card performs issuer-level validation per its credit and compliance policy. On successful validation, card is issued. Card limit is linked to FD amount per SBI Card's applicable credit policy.</p>
-                        <div class="jt-note green">Journey complete. Customer holds a KVB FD and an SBI Card credit card, with pledge in place.</div>
+                        <h4>SBI Card runs its checks and issues the card</h4>
+                        <p>SBI Card carries out its own credit and compliance checks on the customer. If everything passes, the card is issued. The card's spending limit is set as a percentage of the FD amount, per SBI Card's credit policy.</p>
+                        <div class="jt-note green">Done. The customer has a KVB Fixed Deposit and an SBI Card credit card — with the pledge in place linking both.</div>
                     </div>
                 </div>
             </div>
@@ -773,9 +773,9 @@
                 <div class="jt-step">
                     <div class="jt-num">3</div>
                     <div class="jt-content">
-                        <h4>Full collateral disclosure — before partner bank selection</h4>
-                        <p>Customer is informed of FD requirement, pledge restriction, invocation conditions, and financial implications — before any bank is selected or funds committed. Same disclosure obligation as Option 2.</p>
-                        <div class="jt-note">Disclosure must happen here — before FD creation.</div>
+                        <h4>Full disclosure — before the customer selects a bank or deposits money</h4>
+                        <p>Before any bank is chosen or funds are deposited, the customer must be told: how much FD is needed, that the FD will be locked until the card is closed, and that breaking the FD early to recover dues will incur penalties and tax deductions. Same obligation as Option 2.</p>
+                        <div class="jt-note">This disclosure must happen before the FD is created.</div>
                     </div>
                 </div>
                 <div class="jt-step jt-extra">
@@ -797,16 +797,16 @@
                 <div class="jt-step">
                     <div class="jt-num">6</div>
                     <div class="jt-content">
-                        <h4>Customer consents to KYC sharing with SBI Card</h4>
-                        <p>Customer provides DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a>-compliant consent for KYC sharing with SBI Card. In Option 1, there is no pre-existing cobrand relationship between partner bank and SBI Card — the KYC reliance framework must be independently established for each bank.</p>
+                        <h4>Customer gives permission for their identity data to be shared with SBI Card</h4>
+                        <p>Same as Option 2 — the customer explicitly permits the partner bank to share their identity documents with SBI Card, following India's data privacy law.<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a> The key difference in Option 1: there's no existing cobrand agreement between the partner bank and SBI Card, so the rules for how this sharing works must be negotiated separately for each bank.</p>
                         <span class="entity-pill ep-customer">Customer</span>
                     </div>
                 </div>
                 <div class="jt-step">
                     <div class="jt-num">7</div>
                     <div class="jt-content">
-                        <h4>Pledge authorisation and partner bank confirmation</h4>
-                        <p>Customer eSign authorises the cross-entity pledge in favour of SBI Card. Partner bank marks pledge and sends confirmation. This is a standalone tripartite arrangement — not embedded in a cobrand agreement.</p>
+                        <h4>Customer authorises the pledge; partner bank locks the FD</h4>
+                        <p>Same as Option 2 — the customer signs to give SBI Card the right to break the FD if the card goes unpaid, and the partner bank locks the FD and confirms it to SBI Card. The difference: this legal arrangement is a standalone three-party contract negotiated from scratch — not embedded in an existing cobrand agreement.</p>
                         <span class="entity-pill ep-kvb">Partner bank</span> <span class="entity-pill ep-customer">Customer</span>
                     </div>
                 </div>
@@ -815,7 +815,7 @@
                     <div class="jt-content">
                         <h4>SBI Card issuer check and card issuance</h4>
                         <p>SBI Card performs issuer-level validation per its credit and compliance policy. On successful validation, card is issued.</p>
-                        <div class="jt-note green">Journey complete. Customer holds a partner bank FD and an SBI Card credit card, with pledge in place.</div>
+                        <div class="jt-note green">Done. The customer has a partner bank Fixed Deposit and an SBI Card credit card — with the pledge in place linking both.</div>
                     </div>
                 </div>
             </div>
@@ -829,8 +829,8 @@
 <section id="ownership">
     <div class="container">
         <p class="section-label">Operating Model</p>
-        <h2>Ownership and KYC model</h2>
-        <p class="section-desc">Each entity owns its regulated product. Hyperface orchestrates the journey across systems. Regulated entities retain ownership and accountability for all regulated activities.</p>
+        <h2>Who owns what</h2>
+        <p class="section-desc">KVB handles everything to do with the Fixed Deposit. SBI Card handles everything to do with the credit card. Hyperface connects their systems so the customer experience is seamless — but KVB and SBI Card remain fully responsible for their own regulated activities.</p>
 
         <table class="ownership-table">
             <thead>
@@ -874,28 +874,28 @@
             </tbody>
         </table>
 
-        <h3 style="font-size:1.05rem;font-weight:600;color:var(--navy);margin:.75rem 0 .9rem;">KYC reliance flow</h3>
+        <h3 style="font-size:1.05rem;font-weight:600;color:var(--navy);margin:.75rem 0 .9rem;">How identity verification (KYC) flows between entities</h3>
         <div class="kyc-flow">
             <div class="kyc-step">
                 <span class="kyc-step-num">1</span>
-                <p>KVB performs primary customer KYC as part of FD onboarding</p>
+                <p>KVB verifies the customer's identity (KYC) when the customer opens the Fixed Deposit</p>
             </div>
             <div class="kyc-step">
                 <span class="kyc-step-num">2</span>
-                <p>Customer provides DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a>-compliant consent for relevant KYC to be shared with SBI Card — purpose-limited, with withdrawal rights</p>
+                <p>Customer explicitly permits KVB to share their identity data with SBI Card — only for issuing the credit card — and is told they can withdraw this permission. This follows India's data privacy law (DPDP Act, 2023).<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a></p>
             </div>
             <div class="kyc-step">
                 <span class="kyc-step-num">3</span>
-                <p>SBI Card performs issuer-specific validation in accordance with its credit and compliance policy — scope to be confirmed with SBI Card compliance <span class="assum-tag">Assumed</span></p>
+                <p>SBI Card runs its own credit and compliance checks on the customer — the exact scope of what SBI Card must verify independently needs to be confirmed with SBI Card's compliance team <span class="assum-tag">Assumed</span></p>
             </div>
             <div class="kyc-step">
                 <span class="kyc-step-num">4</span>
-                <p>SBI Card proceeds with card issuance based on applicable policy checks <span class="assum-tag">Assumed</span></p>
+                <p>If the checks pass, SBI Card issues the credit card <span class="assum-tag">Assumed</span></p>
             </div>
         </div>
 
         <div class="info-note">
-            <strong>Regulatory note:</strong> The extent to which SBI Card (as an NBFC-CC) may rely on KVB's KYC under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a> — and what issuer-level validation remains mandatory — requires explicit compliance confirmation. The cobrand agreement may provide a more defensible commercial basis for reliance in Option 2, but does not substitute for regulatory sign-off.
+            <strong>Regulatory note:</strong> SBI Card is a non-banking card company (NBFC-CC) — not a bank. How much of KVB's identity verification it can legally rely on, without repeating the entire process independently, isn't fully settled under RBI rules.<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a> The cobrand relationship (Option 2) gives a stronger legal basis for this — but it doesn't replace the need for formal regulatory sign-off.
         </div>
     </div>
 </section>
@@ -906,21 +906,21 @@
 <section id="collateral">
     <div class="container">
         <p class="section-label">The Hard Part</p>
-        <h2>The collateral construct</h2>
-        <p class="section-desc">Standard bank lien mechanics don't apply cross-entity. A pledge / tripartite arrangement is required — and it's the most structurally novel element of this construct.</p>
+        <h2>How SBI Card secures itself against the KVB Fixed Deposit</h2>
+        <p class="section-desc">This is the most structurally novel part of the whole construct. Normally, a bank that holds both your deposit and your credit can simply freeze the deposit if you stop paying — this right is called a lien. Here, the deposit is at KVB but the credit is with SBI Card. A different legal arrangement — a pledge — is needed.</p>
 
         <div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.5rem;margin-bottom:1.5rem;">
-            <p style="font-size:.83rem;font-weight:600;color:var(--slate);margin-bottom:.3rem;">Why a standard bank lien doesn't work here</p>
-            <p style="font-size:.83rem;color:var(--muted);">A bank can only exercise its right of lien over deposits held with itself. SBI Card is not KVB's depositor-creditor — so SBI Card cannot simply "lien-mark" a KVB FD. A different legal mechanism is needed.</p>
+            <p style="font-size:.83rem;font-weight:600;color:var(--slate);margin-bottom:.3rem;">Why the standard approach doesn't apply here</p>
+            <p style="font-size:.83rem;color:var(--muted);">A bank's right to freeze a deposit (called a lien) only works when it holds both the deposit <em>and</em> the outstanding debt. SBI Card is the creditor — but it doesn't hold the FD. KVB does. So SBI Card has no automatic right over a KVB deposit. A separate legal arrangement is needed where the customer formally gives SBI Card this right.</p>
         </div>
 
-        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">How the proposed pledge / tripartite structure works <span class="assum-tag">Proposed — subject to legal validation</span></p>
+        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">How the pledge arrangement works — step by step <span class="assum-tag">Proposed — subject to legal validation</span></p>
         <div class="pledge-steps">
             <div class="pledge-row">
                 <div class="pledge-num">1</div>
                 <div class="pledge-row-content">
-                    <h4>Customer opens an FD at KVB</h4>
-                    <p>The FD is in the customer's name. KVB holds the funds. By default, only KVB can act on it — SBI Card has no standing here.</p>
+                    <h4>Customer opens a Fixed Deposit at KVB</h4>
+                    <p>The FD is in the customer's name. KVB holds the money. At this point, only KVB can act on it — SBI Card has no rights over it yet.</p>
                     <div class="ep"><span class="entity-pill ep-customer">Customer</span> <span class="entity-pill ep-kvb">KVB</span></div>
                 </div>
             </div>
@@ -935,26 +935,26 @@
             <div class="pledge-row">
                 <div class="pledge-num">3</div>
                 <div class="pledge-row-content">
-                    <h4>KVB acknowledges the pledge and commits to honour it</h4>
-                    <p>KVB signs a tripartite agreement: it marks the FD as restricted and agrees that if SBI Card sends an invocation instruction, KVB will break the FD and remit proceeds. In Option 2, this is embedded in the cobrand agreement. In Option 1, it must be negotiated from scratch with each partner bank.</p>
+                    <h4>KVB formally commits to act on SBI Card's instructions</h4>
+                    <p>KVB signs a three-party agreement (tripartite agreement) — between the customer, KVB, and SBI Card. KVB formally locks the FD and commits: if SBI Card sends a request to break the FD because of a default, KVB will do so and send the proceeds to SBI Card. In Option 2, this is embedded in the existing cobrand agreement. In Option 1, it must be negotiated from scratch with each new partner bank.</p>
                     <div class="ep"><span class="entity-pill ep-kvb">KVB commits</span></div>
                 </div>
             </div>
         </div>
 
-        <h3 style="font-size:.9rem;font-weight:600;color:var(--navy);margin:1.25rem 0 .75rem;">Illustrative legal mechanisms — subject to independent legal review</h3>
+        <h3 style="font-size:.9rem;font-weight:600;color:var(--navy);margin:1.25rem 0 .75rem;">Three possible legal structures — all need independent legal review before use</h3>
         <div class="mechanism-grid">
             <div class="mechanism-card">
-                <h4>Pledge of FD Receipt (FDR)</h4>
-                <p>Customer pledges the FD certificate to SBI Card. KVB acknowledges and agrees to honour invocation instructions.</p>
+                <h4>Pledge of FD Certificate</h4>
+                <p>The customer pledges their FD certificate to SBI Card as security. KVB acknowledges this and agrees to break the FD and send proceeds to SBI Card if requested due to a default.</p>
             </div>
             <div class="mechanism-card">
                 <h4>Tripartite Agreement</h4>
-                <p>Three-party arrangement between Customer, KVB, and SBI Card. KVB contractually commits to FD closure and remittance on SBI Card's request.</p>
+                <p>A legal contract signed by all three parties — Customer, KVB, and SBI Card. KVB formally commits to breaking the FD and sending the money to SBI Card upon request.</p>
             </div>
             <div class="mechanism-card">
                 <h4>Assignment of Proceeds</h4>
-                <p>Customer assigns the right to FD proceeds to SBI Card for the duration of the arrangement.</p>
+                <p>The customer transfers their right to the FD's proceeds over to SBI Card for the duration of the credit card arrangement.</p>
             </div>
         </div>
 
@@ -970,40 +970,40 @@
 <section id="default">
     <div class="container">
         <p class="section-label">Default Handling</p>
-        <h2>Lien invocation and default handling</h2>
-        <p class="section-desc">The invocation process is triggered by SBI Card and executed by KVB. Net proceeds after deductions are remitted to SBI Card; any residual outstanding follows standard recovery.</p>
+        <h2>What happens when a customer stops paying</h2>
+        <p class="section-desc">If the customer defaults on their credit card, SBI Card instructs KVB to break the FD and recover the dues. KVB deducts applicable taxes and penalties, then sends the remaining amount to SBI Card. If the FD doesn't cover the full outstanding amount, SBI Card uses its standard collections process for the rest.</p>
 
-        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">Invocation flow</p>
+        <p style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;">Step-by-step: how the FD is used to recover dues</p>
         <div class="pledge-steps" style="margin-bottom:1.75rem;">
             <div class="pledge-row">
                 <div class="pledge-num">1</div>
                 <div class="pledge-row-content">
-                    <h4>Customer crosses agreed delinquency threshold</h4>
-                    <p>SBI Card initiates customer communication and allows a cure period. Invocation does not proceed until the cure period has expired without resolution.</p>
+                    <h4>Customer misses payments beyond the agreed limit</h4>
+                    <p>SBI Card contacts the customer and gives them a window to pay (a "cure period") before taking any action on the FD. The FD is not touched until this window closes without resolution.</p>
                     <div class="ep"><span class="entity-pill ep-sbi">SBI Card</span></div>
                 </div>
             </div>
             <div class="pledge-row">
                 <div class="pledge-num">2</div>
                 <div class="pledge-row-content">
-                    <h4>SBI Card raises invocation request to KVB</h4>
-                    <p>On expiry of cure period without resolution, SBI Card sends a formal invocation instruction to KVB, referencing the pledge and the outstanding dues.</p>
+                    <h4>SBI Card formally instructs KVB to break the FD</h4>
+                    <p>If the customer hasn't resolved the overdue amount by the deadline, SBI Card sends KVB a formal request to break the FD, specifying the outstanding amount owed.</p>
                     <div class="ep"><span class="entity-pill ep-sbi">SBI Card</span> <span class="entity-pill ep-kvb">KVB receives</span></div>
                 </div>
             </div>
             <div class="pledge-row">
                 <div class="pledge-num">3</div>
                 <div class="pledge-row-content">
-                    <h4>KVB forecloses the FD and calculates net proceeds</h4>
-                    <p>KVB breaks the FD, deducts applicable TDS and premature closure penalty, and calculates net proceeds available for remittance. Net proceeds will be below FD face value.</p>
+                    <h4>KVB breaks the FD and calculates what's available after deductions</h4>
+                    <p>KVB closes the FD early, deducting applicable tax (TDS) and the penalty for premature closure. The amount sent to SBI Card will be less than the original FD value because of these deductions.</p>
                     <div class="ep"><span class="entity-pill ep-kvb">KVB</span></div>
                 </div>
             </div>
             <div class="pledge-row">
                 <div class="pledge-num">4</div>
                 <div class="pledge-row-content">
-                    <h4>KVB remits proceeds; residual follows SBI Card recovery</h4>
-                    <p>KVB remits net proceeds to SBI Card within the agreed SLA. If outstanding dues exceed net proceeds, the residual balance follows SBI Card's standard recovery process.</p>
+                    <h4>KVB sends the funds to SBI Card; any remaining dues go to collections</h4>
+                    <p>KVB transfers the net amount to SBI Card within an agreed timeframe. If the FD proceeds don't fully cover what the customer owes, SBI Card uses its standard collections process to recover the rest.</p>
                     <div class="ep"><span class="entity-pill ep-kvb">KVB</span> <span class="entity-pill ep-sbi">SBI Card</span></div>
                 </div>
             </div>
@@ -1019,30 +1019,30 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Outstanding lower than net FD proceeds</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Partial recovery from FD; remaining FD balance released to customer</td>
+                    <td>Amount owed is less than the FD value</td>
+                    <td style="font-size:.83rem;color:var(--muted);">SBI Card takes what it's owed from the FD; the remainder is returned to the customer</td>
                 </tr>
                 <tr>
-                    <td>Outstanding equals net FD proceeds</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Full FD applied; account closed</td>
+                    <td>Amount owed exactly matches the FD value</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Entire FD used to recover the dues; account closed</td>
                 </tr>
                 <tr>
-                    <td>Outstanding exceeds net FD proceeds</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Full FD applied; residual follows SBI Card standard recovery process</td>
+                    <td>Amount owed is more than the FD value</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Entire FD used; remaining unpaid amount goes through SBI Card's standard collections process</td>
                 </tr>
                 <tr>
-                    <td>Customer requests FD closure with active pledge</td>
-                    <td style="font-size:.83rem;color:var(--muted);">KVB declines closure; customer directed to SBI Card to discharge pledge via card closure or outstanding settlement</td>
+                    <td>Customer wants to close the FD while the card is still active</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB declines. Customer must first close the credit card or settle outstanding dues with SBI Card — only then can the FD pledge be released and the FD closed</td>
                 </tr>
                 <tr>
-                    <td>FD matures during active card period</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Customer notified ~30 days in advance <span class="assum-tag">Illustrative</span>; invited to renew FD to maintain card limit; limit suspended on non-renewal. Specific handling to be jointly defined.</td>
+                    <td>FD reaches its maturity date while the card is still active</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Customer notified ~30 days before maturity <span class="assum-tag">Illustrative</span>; invited to renew the FD to keep the card active. If not renewed, the card limit is suspended. Whether the card is cancelled or just suspended to be jointly defined.</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="info-note">
-            <strong>Credit bureau reporting:</strong> Treatment of pledge invocation — whether reported as settled or written off — has material implications for the customer's credit profile. This requires explicit SBI Card compliance guidance before pilot.
+            <strong>Impact on the customer's credit score:</strong> When the FD is broken to recover dues, how this gets reported to credit bureaus matters significantly for the customer's financial future. It could be marked as "settled" (less damaging) or "written off" (a serious negative mark). SBI Card must decide this before the pilot launches — it cannot be figured out after the fact.
         </div>
     </div>
 </section>
@@ -1053,8 +1053,8 @@
 <section id="audit">
     <div class="container">
         <p class="section-label">Governance</p>
-        <h2>Audit trail and governance</h2>
-        <p class="section-desc">KVB and SBI Card own and are accountable for their respective regulated audit records. Hyperface may provide supporting event logs for the orchestration layer, subject to data governance agreements.</p>
+        <h2>Record-keeping and accountability</h2>
+        <p class="section-desc">Every key step in the customer journey must be recorded and attributable. KVB and SBI Card are each responsible for maintaining their own records. Hyperface keeps a technical activity log that can support them — but data-sharing rules between all parties must be agreed before any of that data can be used.</p>
 
         <table class="ownership-table" style="margin-bottom:1.5rem;">
             <thead>
@@ -1104,7 +1104,7 @@
         </table>
 
         <div class="info-note">
-            <strong>RBI IT Outsourcing (2023):</strong> Hyperface's orchestration role must be assessed against the RBI IT Outsourcing Master Direction (2023)<a class="src-chip" href="#sources" title="Master Direction on Outsourcing of IT Services, 2023">S4</a>. KVB and SBI Card must retain control and accountability for all regulated activities, maintain the ability to operate independently of Hyperface availability, and define fallback procedures as part of the outsourcing compliance assessment.
+            <strong>RBI rules on IT outsourcing:</strong> Because Hyperface connects KVB and SBI Card's systems, it counts as an IT outsourcing partner under RBI rules (IT Outsourcing Master Direction, 2023).<a class="src-chip" href="#sources" title="Master Direction on Outsourcing of IT Services, 2023">S4</a> This means KVB and SBI Card must always be able to operate independently if Hyperface has a technical outage — and must document what they'll do in that situation as part of their regulatory compliance assessment.
         </div>
     </div>
 </section>
@@ -1115,8 +1115,8 @@
 <section id="failure">
     <div class="container">
         <p class="section-label">Contingency Handling</p>
-        <h2>Failure modes and contingency handling</h2>
-        <p class="section-desc">Illustrative handling for key failure scenarios. All of these require joint definition before pilot — they cannot be left as open items at launch.</p>
+        <h2>What happens if something goes wrong</h2>
+        <p class="section-desc">Key scenarios where things could break — and how they should be handled. All of these must be agreed between KVB, SBI Card, and Hyperface before the pilot launches. They cannot be left unresolved.</p>
 
         <table class="ownership-table" style="margin-bottom:1.5rem;">
             <thead>
@@ -1128,23 +1128,23 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">FD created; SBI Card issuer check fails</td>
-                    <td style="font-size:.83rem;color:var(--muted);">SBI Card notifies customer of non-issuance. KVB notified to release pledge restriction. Customer may retain FD or request closure. SBI Card defines customer communication timeline.</td>
+                    <td style="font-weight:600;color:var(--navy);">FD is open but SBI Card declines to issue the card</td>
+                    <td style="font-size:.83rem;color:var(--muted);">SBI Card tells the customer the card won't be issued. KVB is told to release the FD lock (since the card never happened). Customer can keep or close the FD. SBI Card defines how quickly this communication happens.</td>
                     <td><span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">communication</span> <span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">pledge release</span></td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Pledge marking fails at KVB (technical / operational)</td>
-                    <td style="font-size:.83rem;color:var(--muted);">FD creation confirmed but pledge not confirmed. Card issuance does not proceed. Customer notified of delay. Retry or manual resolution within agreed SLA.</td>
+                    <td style="font-weight:600;color:var(--navy);">FD is created but the pledge lock fails at KVB (technical or operational error)</td>
+                    <td style="font-size:.83rem;color:var(--muted);">The FD exists but hasn't been marked as pledged. Card issuance is paused. Customer is notified of the delay. KVB retries or resolves manually within an agreed timeframe.</td>
                     <td><span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">resolution</span> <span class="owner-tag o-hyp">Hyperface</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">event log alert</span></td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Customer withdraws consent before pledge creation</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Pledge not created. Customer notified that card issuance requires pledge consent. Customer may retain or close FD at their discretion.</td>
+                    <td style="font-weight:600;color:var(--navy);">Customer changes their mind before the pledge is created</td>
+                    <td style="font-size:.83rem;color:var(--muted);">No pledge is created and no card is issued. Customer is told that the pledge is a mandatory step for the card. They can keep or close the FD as they choose.</td>
                     <td><span class="owner-tag o-sbi">SBI Card</span> <span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">joint communication</span></td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Customer requests FD closure with active pledge</td>
-                    <td style="font-size:.83rem;color:var(--muted);">KVB declines closure and directs customer to SBI Card. Customer informed that FD can be released only upon pledge discharge via card closure or outstanding settlement.</td>
+                    <td style="font-weight:600;color:var(--navy);">Customer asks to close the FD while the card is still active</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB declines and directs the customer to SBI Card. The FD cannot be released until the pledge is discharged — by closing the credit card or settling any outstanding dues with SBI Card.</td>
                     <td><span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">decline</span> <span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">guidance</span></td>
                 </tr>
                 <tr>
@@ -1153,8 +1153,8 @@
                     <td><span class="owner-tag o-kvb">KVB</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">maturity notification</span> <span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">card limit action</span></td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Hyperface system unavailability</td>
-                    <td style="font-size:.83rem;color:var(--muted);">KVB and SBI Card must maintain the ability to continue regulated operations independent of Hyperface availability. Fallback operational procedures to be defined as part of the outsourcing compliance assessment.</td>
+                    <td style="font-weight:600;color:var(--navy);">Hyperface platform is down</td>
+                    <td style="font-size:.83rem;color:var(--muted);">KVB and SBI Card must each be able to continue their regulated operations independently — without relying on Hyperface being up. What they do in this scenario must be documented and agreed before launch, as part of RBI IT outsourcing compliance.</td>
                     <td><span class="owner-tag o-kvb">KVB</span> <span class="owner-tag o-sbi">SBI Card</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">fallback procedures</span> <span class="owner-tag o-hyp">Hyperface</span> <span style="font-size:.75rem;color:var(--muted);display:block;margin-top:.3rem;">SLA + continuity</span></td>
                 </tr>
             </tbody>
@@ -1168,8 +1168,8 @@
 <section id="compliance">
     <div class="container">
         <p class="section-label">Regulatory</p>
-        <h2>RBI / Compliance considerations</h2>
-        <p class="section-desc">These areas require joint validation with SBI Card, KVB, and legal / compliance stakeholders. This is not an exhaustive list and does not constitute a regulatory opinion.</p>
+        <h2>Regulatory questions that must be answered before launch</h2>
+        <p class="section-desc">These are the key regulatory questions that must be formally answered before this construct can go live. All of them need sign-off from SBI Card and KVB's compliance teams, and in several cases from external lawyers. This is not a regulatory opinion — it's a checklist of what needs to be confirmed.</p>
 
         <table class="ownership-table" style="margin-bottom:1.5rem;">
             <thead>
@@ -1180,34 +1180,34 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">KYC reliance (NBFC-CC)</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Extent of reliance permissible for SBI Card on KVB's KYC under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a>; what issuer-specific validation remains mandatory and cannot be delegated to KVB</td>
+                    <td style="font-weight:600;color:var(--navy);">How much of KVB's identity verification can SBI Card rely on?</td>
+                    <td style="font-size:.83rem;color:var(--muted);">SBI Card is separately regulated and may need to verify certain things about the customer independently. How much it can rely on KVB's KYC — and what SBI Card must still check itself — needs to be confirmed under RBI guidelines.<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a></td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Cross-entity collateral</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Legal enforceability of pledge / tripartite arrangement across separately regulated entities; whether the cobrand agreement can serve as the commercial backbone for KVB's obligations to SBI Card <span class="assum-tag">Assumed in Option 2</span></td>
+                    <td style="font-weight:600;color:var(--navy);">Is the pledge legally enforceable across two separate regulated entities?</td>
+                    <td style="font-size:.83rem;color:var(--muted);">The pledge gives SBI Card the right to instruct KVB to break the FD. Whether this holds up legally — especially in a dispute or insolvency scenario — needs independent legal review. In Option 2, the cobrand agreement is assumed to be the legal foundation for KVB's commitment. <span class="assum-tag">Assumed in Option 2</span></td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Customer disclosures and consent</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Required disclosures under RBI credit card guidelines; DPDP Act (2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a> compliance for cross-entity KYC data sharing — purpose limitation, data minimisation, and withdrawal rights</td>
+                    <td style="font-weight:600;color:var(--navy);">What must the customer be told, and does the consent meet privacy law?</td>
+                    <td style="font-size:.83rem;color:var(--muted);">RBI credit card rules specify what must be disclosed to the customer. India's data privacy law (DPDP Act, 2023)<a class="src-chip" href="#sources" title="Digital Personal Data Protection Act, 2023">S1</a> governs how identity data can be shared across companies — including that consent must be specific to its purpose and customers must be able to withdraw it.</td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Cobrand card framework (Option 2)</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Validation against RBI Master Direction on Credit Card and Debit Card Operations (2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a>, including co-branding provisions and permissible activities for the cobrand partner</td>
+                    <td style="font-weight:600;color:var(--navy);">Does this FD-backed cobrand structure comply with RBI's cobrand card rules? (Option 2)</td>
+                    <td style="font-size:.83rem;color:var(--muted);">RBI has specific rules for co-branded credit cards (2022)<a class="src-chip" href="#sources" title="Master Direction – Credit Card and Debit Card – Issuance and Conduct Directions, 2022">S3</a>, including what a cobrand partner (KVB) is allowed to do. This construct needs to be validated against those rules.</td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">IT outsourcing (Hyperface)</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Hyperface's orchestration role assessed against RBI IT Outsourcing Master Direction (2023)<a class="src-chip" href="#sources" title="Master Direction on Outsourcing of IT Services, 2023">S4</a>; KVB and SBI Card must retain control and accountability for all regulated activities and must be able to operate independently of Hyperface</td>
+                    <td style="font-weight:600;color:var(--navy);">Is Hyperface's role compliant with RBI's IT outsourcing rules?</td>
+                    <td style="font-size:.83rem;color:var(--muted);">Hyperface connecting KVB and SBI Card's systems counts as IT outsourcing under RBI rules (2023).<a class="src-chip" href="#sources" title="Master Direction on Outsourcing of IT Services, 2023">S4</a> Both KVB and SBI Card must ensure they stay in full control of their regulated activities and can operate without Hyperface if needed.</td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;color:var(--navy);">Grievance redressal</td>
-                    <td style="font-size:.83rem;color:var(--muted);">Delineation of servicing ownership for cross-entity complaints; applicability of RBI Integrated Ombudsman Scheme to this construct — must be defined before launch, not after</td>
+                    <td style="font-weight:600;color:var(--navy);">Who handles customer complaints that involve both KVB and SBI Card?</td>
+                    <td style="font-size:.83rem;color:var(--muted);">If a customer has a complaint about both the FD and the credit card, who resolves it — and through which channel? It must also be confirmed whether RBI's Ombudsman covers disputes in a cross-entity arrangement like this. This must be defined before launch.</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="info-note">
-            Option 2 is directionally simpler from a regulatory standpoint — not regulatory-cleared. None of the above items can be assumed resolved. All require explicit sign-off from SBI Card compliance and, where applicable, from KVB and legal counsel.
+            Option 2 is simpler from a regulatory angle — but "simpler" doesn't mean "approved". Every question above still needs formal sign-off. Nothing here should be assumed resolved.
         </div>
     </div>
 </section>
@@ -1219,7 +1219,7 @@
     <div class="container">
         <p class="section-label">For Discussion</p>
         <h2>Open questions and next steps</h2>
-        <p class="section-desc">Key areas where joint alignment is required before this construct can be progressed to pilot.</p>
+        <p class="section-desc">Key decisions that SBI Card and KVB need to align on before this can move to a pilot. These aren't hypothetical — they need concrete answers.</p>
 
         <div class="question-list" style="margin-bottom:2rem;">
             <div class="question-item">
@@ -1228,52 +1228,52 @@
             </div>
             <div class="question-item">
                 <span class="q-num">Q2</span>
-                <p>To what extent can KVB's KYC be relied upon by SBI Card under the RBI KYC Master Direction<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a>, and what issuer-level validation remains mandatory?</p>
+                <p>How much of KVB's identity verification can SBI Card legally rely on<a class="src-chip" href="#sources" title="Master Direction – KYC Direction, 2016 (as updated)">S2</a>, and what must SBI Card still verify independently?</p>
             </div>
             <div class="question-item">
                 <span class="q-num">Q3</span>
-                <p>What is the preferred legal mechanism for cross-entity collateral — pledge, assignment, or tripartite arrangement — and what legal review process is envisaged?</p>
+                <p>Which legal mechanism should be used to give SBI Card rights over the KVB FD — pledge, assignment, or three-party agreement — and how does SBI Card plan to get it independently reviewed?</p>
             </div>
             <div class="question-item">
                 <span class="q-num">Q4</span>
-                <p>What amendments to the existing KVB cobrand agreement are required to cover FD-backed card and pledge specifics, and who leads that process?</p>
+                <p>What changes to the existing KVB cobrand agreement are needed to cover the FD-backed card and pledge arrangement — and who leads that legal process?</p>
             </div>
             <div class="question-item">
                 <span class="q-num">Q5</span>
-                <p>What delinquency threshold and cure period should govern pledge invocation, and who owns customer communication at each stage?</p>
+                <p>After how many missed payments should SBI Card request KVB to break the FD? How long must the customer be given to pay before that happens? And who communicates with the customer at each stage?</p>
             </div>
             <div class="question-item">
                 <span class="q-num">Q6</span>
-                <p>How should FD maturity during an active card lifecycle be handled — mandatory renewal, limit suspension, or card cancellation?</p>
+                <p>When the FD reaches its maturity date while the card is still active, what happens — mandatory renewal, card limit suspended, or card cancelled?</p>
             </div>
             <div class="question-item">
                 <span class="q-num">Q7</span>
-                <p>What credit bureau reporting treatment is intended for pledge invocation scenarios — settled or written off?</p>
+                <p>When the FD is broken to recover card dues, will this be reported to credit bureaus as "settled" or "written off"? This choice has a significant impact on the customer's credit score.</p>
             </div>
         </div>
 
         <div class="next-steps">
-            <h3>Prerequisites before pilot can be initiated</h3>
+            <h3>What needs to be in place before the pilot can start</h3>
             <div class="steps-grid" style="grid-template-columns:repeat(5,1fr);">
                 <div class="ns-item">
                     <h4>Legal</h4>
-                    <p>Cobrand agreement amendment covering FD-backed card, pledge construct, and invocation procedures</p>
+                    <p>Update the KVB–SBI Card cobrand agreement to include FD-backed card terms, the pledge arrangement, and rules for what happens if a customer defaults</p>
                 </div>
                 <div class="ns-item">
                     <h4>Compliance</h4>
-                    <p>SBI Card and KVB sign-off on KYC reliance scope, collateral arrangement, and customer disclosure framework</p>
+                    <p>Formal approval from SBI Card and KVB on: how much identity verification can be shared, how the pledge works legally, and what the customer must be told</p>
                 </div>
                 <div class="ns-item">
                     <h4>Technology</h4>
-                    <p>API integration across KVB, SBI Card, and Hyperface for FD confirmation, pledge marking, and event logging</p>
+                    <p>System connections (APIs) between KVB, SBI Card, and Hyperface — for confirming FD creation, locking the pledge, and logging key events</p>
                 </div>
                 <div class="ns-item">
                     <h4>Product</h4>
-                    <p>DPDP-compliant consent language; customer communication templates for FD maturity and invocation scenarios</p>
+                    <p>Customer consent language that meets India's data privacy law; communication templates for FD maturity reminders and default recovery scenarios</p>
                 </div>
                 <div class="ns-item">
                     <h4>Operations</h4>
-                    <p>Defined SLAs for pledge confirmation, card issuance, and invocation settlement; cross-entity grievance process</p>
+                    <p>Agreed timelines for pledge confirmation, card issuance, and FD recovery; a clear process for handling complaints that span both KVB and SBI Card</p>
                 </div>
             </div>
         </div>
